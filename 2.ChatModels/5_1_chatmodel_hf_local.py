@@ -5,13 +5,13 @@ llm=HuggingFacePipeline.from_model_id(
     task='text-generation',
     pipeline_kwargs=dict(
         temperature=0.5,
-        max_new_tokens=1000
+        max_new_tokens=10000
     )
 )
 
 
 model=ChatHuggingFace(llm=llm)
 
-result=model.invoke("Write a story about two students ,canteen, out of money, gpu, machinelearning,")
+result=model.invoke("Prove mathematically that line joining midpoint of two sides of triangle is parallel to third side")
 
 print(result.content)

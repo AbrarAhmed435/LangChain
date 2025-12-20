@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=sam3
+#SBATCH --job-name=langchain
 #SBATCH --partition=highq
 #SBATCH --gres=gpu:h100:1
 #SBATCH --qos=highq
