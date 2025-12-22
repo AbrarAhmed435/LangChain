@@ -1,0 +1,59 @@
+
+Loading checkpoint shards:   0%|          | 0/8 [00:00<?, ?it/s]
+Loading checkpoint shards:  12%|█▎        | 1/8 [00:00<00:01,  4.44it/s]
+Loading checkpoint shards:  25%|██▌       | 2/8 [00:00<00:01,  4.31it/s]
+Loading checkpoint shards:  38%|███▊      | 3/8 [00:00<00:01,  4.27it/s]
+Loading checkpoint shards:  50%|█████     | 4/8 [00:00<00:00,  4.26it/s]
+Loading checkpoint shards:  62%|██████▎   | 5/8 [00:01<00:00,  4.27it/s]
+Loading checkpoint shards:  75%|███████▌  | 6/8 [00:01<00:00,  4.29it/s]
+Loading checkpoint shards:  88%|████████▊ | 7/8 [00:01<00:00,  4.29it/s]
+Loading checkpoint shards: 100%|██████████| 8/8 [00:01<00:00,  4.64it/s]
+Device set to use cuda:0
+<|user|>
+Prove mathematically that line joining midpoint of two sides of triangle is parallel to third side</s>
+<|assistant|>
+Let ABC be a triangle with sides AB, BC, and AC. Let M be the midpoint of side AB and N be the midpoint of side BC.
+
+To prove that the line joining M and N is parallel to side AC, we need to show that the slopes of the lines joining vertices A, M, and N with vertex C are equal.
+
+Let's first find the coordinates of M and N. Since M is the midpoint of AB, we have:
+
+M = (1/2) * (x_a, y_a) + (1/2) * (x_b, y_b)
+
+M = ((x_a + x_b) / 2, (y_a + y_b) / 2)
+
+Similarly, since N is the midpoint of BC, we have:
+
+N = (1/2) * (x_b, y_b) + (1/2) * (x_c, y_c)
+
+N = ((x_b + x_c) / 2, (y_b + y_c) / 2)
+Personal/LangChain/2.ChatModels
+Now, let's find the slopes of the lines AM, AN, and AC.
+
+The slope of AM is:
+
+(y_c - y_a) / (x_c - x_a)
+
+The slope of AN is:
+
+(y_c - y_b) / (x_c - x_b)
+
+The slope of AC is:
+
+(y_c - y_a) / (x_c - x_a)
+
+Since the slopes of AM and AN are equal, we have:
+
+(y_c - y_a) / (x_c - x_a) = (y_c - y_b) / (x_c - x_b)
+
+Multiplying both sides by (x_c - x_a), we get:
+
+(y_c - y_a) * (x_c - x_b) = (y_c - y_b) * (x_c - x_a)
+
+Subtracting (y_c - y_b) * (x_c - x_a) from both sides, we get:
+
+(y_c - y_a) * (x_c - x_b) - (y_c - y_b) * (x_c - x_a) = 0
+
+This is the formula for the cross product of two vectors. Since the cross product of two collinear vectors is zero, this implies that the vectors (x_c - x_a, y_c - y_a) and (x_c - x_b, y_c - y_b) are collinear. This further implies that the lines joining vertices A, M, and C with vertex C are parallel to the line joining vertices B, N, and C.
+
+Therefore, the line joining midpoints M and N is parallel to side AC.

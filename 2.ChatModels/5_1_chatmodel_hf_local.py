@@ -1,7 +1,7 @@
 from langchain_huggingface import ChatHuggingFace,HuggingFacePipeline
 
 llm=HuggingFacePipeline.from_model_id(
-    model_id="HuggingFaceH4/zephyr-7b-beta",
+    model_id="nvidia/Nemotron-Cascade-8B",
     task='text-generation',
     pipeline_kwargs=dict(
         temperature=0.5,
@@ -12,6 +12,6 @@ llm=HuggingFacePipeline.from_model_id(
 
 model=ChatHuggingFace(llm=llm)
 
-result=model.invoke("Prove mathematically that line joining midpoint of two sides of triangle is parallel to third side")
+result=model.invoke("Prove mathematically that 0 raised to power 0 has a value, of 1 , and also give a detailed report of how it gives value 1.")
 
 print(result.content)
