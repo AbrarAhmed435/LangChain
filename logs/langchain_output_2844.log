@@ -1,83 +1,0 @@
-no change     /apps/anaconda3/condabin/conda
-no change     /apps/anaconda3/bin/conda
-no change     /apps/anaconda3/bin/conda-env
-no change     /apps/anaconda3/bin/activate
-no change     /apps/anaconda3/bin/deactivate
-no change     /apps/anaconda3/etc/profile.d/conda.sh
-no change     /apps/anaconda3/etc/fish/conf.d/conda.fish
-no change     /apps/anaconda3/shell/condabin/Conda.psm1
-no change     /apps/anaconda3/shell/condabin/conda-hook.ps1
-no change     /apps/anaconda3/lib/python3.11/site-packages/xontrib/conda.xsh
-no change     /apps/anaconda3/etc/profile.d/conda.csh
-no change     /home/janib/.bashrc
-No action taken.
-/home/janib/.conda/envs/langchain/lib/python3.14/site-packages/langchain_core/_api/deprecation.py:26: UserWarning: Core Pydantic V1 functionality isn't compatible with Python 3.14 or greater.
-  from pydantic.v1.fields import FieldInfo as FieldInfoV1
-Loading checkpoint shards:   0%|          | 0/8 [00:00<?, ?it/s]Loading checkpoint shards:  12%|█▎        | 1/8 [00:02<00:15,  2.26s/it]Loading checkpoint shards:  25%|██▌       | 2/8 [00:43<02:31, 25.26s/it]Loading checkpoint shards:  38%|███▊      | 3/8 [01:15<02:21, 28.40s/it]Loading checkpoint shards:  50%|█████     | 4/8 [01:46<01:56, 29.18s/it]Loading checkpoint shards:  62%|██████▎   | 5/8 [02:11<01:23, 27.82s/it]Loading checkpoint shards:  75%|███████▌  | 6/8 [02:41<00:57, 28.58s/it]Loading checkpoint shards:  88%|████████▊ | 7/8 [03:13<00:29, 29.69s/it]Loading checkpoint shards: 100%|██████████| 8/8 [03:30<00:00, 25.49s/it]Loading checkpoint shards: 100%|██████████| 8/8 [03:30<00:00, 26.27s/it]
-Both `device` and `device_map` are specified. `device` will override `device_map`. You will most likely encounter unexpected behavior. Please remove `device` and keep `device_map`.
-Device set to use cpu
-cpu
-Traceback (most recent call last):
-  File "/home/scratch-scholars/Abrar/LangChain/2.ChatModels/5_1_chatmodel_hf_local.py", line 19, in <module>
-    result = model.invoke(
-        "Prove mathematically that the line joining the midpoints of two sides of a triangle is parallel to the third side."
-    )
-  File "/home/janib/.conda/envs/langchain/lib/python3.14/site-packages/langchain_core/language_models/chat_models.py", line 398, in invoke
-    self.generate_prompt(
-    ~~~~~~~~~~~~~~~~~~~~^
-        [self._convert_input(input)],
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    ...<6 lines>...
-        **kwargs,
-        ^^^^^^^^^
-    ).generations[0][0],
-    ^
-  File "/home/janib/.conda/envs/langchain/lib/python3.14/site-packages/langchain_core/language_models/chat_models.py", line 1117, in generate_prompt
-    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
-           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/janib/.conda/envs/langchain/lib/python3.14/site-packages/langchain_core/language_models/chat_models.py", line 927, in generate
-    self._generate_with_cache(
-    ~~~~~~~~~~~~~~~~~~~~~~~~~^
-        m,
-        ^^
-    ...<2 lines>...
-        **kwargs,
-        ^^^^^^^^^
-    )
-    ^
-  File "/home/janib/.conda/envs/langchain/lib/python3.14/site-packages/langchain_core/language_models/chat_models.py", line 1221, in _generate_with_cache
-    result = self._generate(
-        messages, stop=stop, run_manager=run_manager, **kwargs
-    )
-  File "/home/janib/.conda/envs/langchain/lib/python3.14/site-packages/langchain_huggingface/chat_models/huggingface.py", line 759, in _generate
-    llm_result = self.llm._generate(
-        prompts=[llm_input], stop=stop, run_manager=run_manager, **kwargs
-    )
-  File "/home/janib/.conda/envs/langchain/lib/python3.14/site-packages/langchain_huggingface/llms/huggingface_pipeline.py", line 332, in _generate
-    responses = self.pipeline(
-        batch_prompts,
-        **pipeline_kwargs,
-    )
-  File "/home/janib/.conda/envs/langchain/lib/python3.14/site-packages/transformers/pipelines/text_generation.py", line 332, in __call__
-    return super().__call__(text_inputs, **kwargs)
-           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/janib/.conda/envs/langchain/lib/python3.14/site-packages/transformers/pipelines/base.py", line 1448, in __call__
-    outputs = list(final_iterator)
-  File "/home/janib/.conda/envs/langchain/lib/python3.14/site-packages/transformers/pipelines/pt_utils.py", line 126, in __next__
-    item = next(self.iterator)
-  File "/home/janib/.conda/envs/langchain/lib/python3.14/site-packages/transformers/pipelines/pt_utils.py", line 127, in __next__
-    processed = self.infer(item, **self.params)
-  File "/home/janib/.conda/envs/langchain/lib/python3.14/site-packages/transformers/pipelines/base.py", line 1374, in forward
-    model_outputs = self._forward(model_inputs, **forward_params)
-  File "/home/janib/.conda/envs/langchain/lib/python3.14/site-packages/transformers/pipelines/text_generation.py", line 432, in _forward
-    output = self.model.generate(input_ids=input_ids, attention_mask=attention_mask, **generate_kwargs)
-  File "/home/janib/.conda/envs/langchain/lib/python3.14/site-packages/torch/utils/_contextlib.py", line 120, in decorate_context
-    return func(*args, **kwargs)
-  File "/home/janib/.conda/envs/langchain/lib/python3.14/site-packages/transformers/generation/utils.py", line 2388, in generate
-    self._validate_model_kwargs(model_kwargs.copy())
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
-  File "/home/janib/.conda/envs/langchain/lib/python3.14/site-packages/transformers/generation/utils.py", line 1599, in _validate_model_kwargs
-    raise ValueError(
-    ...<2 lines>...
-    )
-ValueError: The following `model_kwargs` are not used by the model: ['load_in_4bit'] (note: typos in the generate arguments will also show up in this list)

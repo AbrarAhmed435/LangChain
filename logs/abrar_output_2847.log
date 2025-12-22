@@ -1,10 +1,0 @@
-Loading checkpoint shards:   0%|          | 0/8 [00:00<?, ?it/s]Loading checkpoint shards:  12%|█▎        | 1/8 [00:00<00:01,  4.48it/s]Loading checkpoint shards:  25%|██▌       | 2/8 [00:00<00:01,  4.36it/s]Loading checkpoint shards:  38%|███▊      | 3/8 [00:00<00:01,  4.31it/s]Loading checkpoint shards:  50%|█████     | 4/8 [00:00<00:00,  4.30it/s]Loading checkpoint shards:  62%|██████▎   | 5/8 [00:01<00:00,  4.30it/s]Loading checkpoint shards:  75%|███████▌  | 6/8 [00:01<00:00,  4.32it/s]Loading checkpoint shards:  88%|████████▊ | 7/8 [00:01<00:00,  4.32it/s]Loading checkpoint shards: 100%|██████████| 8/8 [00:01<00:00,  4.67it/s]
-Device set to use cuda:0
-<|user|>
-Prove mathematically that line joining midpoint of two sides of triangle is parallel to third side</s>
-<|assistant|>
-Let ABC be a triangle with side lengths a, b, and c opposite vertices A, B, and C, respectively. Let M be the midpoint of side AB, and N be the midpoint of side AC.
-
-To prove that the line joining M and N is parallel to the third side BC, we need to show that the slopes of the lines joining M and C, and N and B are equal.
-
-Let us find the coordinates of C and B. Let

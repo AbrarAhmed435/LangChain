@@ -1,26 +1,0 @@
-Loading checkpoint shards:   0%|          | 0/8 [00:00<?, ?it/s]Loading checkpoint shards:  12%|█▎        | 1/8 [00:00<00:01,  4.48it/s]Loading checkpoint shards:  25%|██▌       | 2/8 [00:00<00:01,  4.37it/s]Loading checkpoint shards:  38%|███▊      | 3/8 [00:00<00:01,  4.32it/s]Loading checkpoint shards:  50%|█████     | 4/8 [00:00<00:00,  4.32it/s]Loading checkpoint shards:  62%|██████▎   | 5/8 [00:01<00:00,  4.31it/s]Loading checkpoint shards:  75%|███████▌  | 6/8 [00:01<00:00,  4.33it/s]Loading checkpoint shards:  88%|████████▊ | 7/8 [00:01<00:00,  4.33it/s]Loading checkpoint shards: 100%|██████████| 8/8 [00:01<00:00,  4.68it/s]
-Device set to use cuda:0
-<|user|>
-Write a story about two students ,canteen, out of money, gpu, machinelearning,</s>
-<|assistant|>
-Once upon a time, in a small college nestled in the heart of a bustling city, there were two students - Shruti and Abhishek. They were both passionate about technology and had dreams of making a mark in the world of computer science.
-
-Shruti and Abhishek were in their final year of college, and the semester had just begun. They both had big plans for the semester - Shruti wanted to participate in a national-level coding competition, while Abhishek had his eyes set on an internship at a renowned tech company.
-
-However, things didn't go as planned. Shruti and Abhishek were running out of money, and they had already exhausted their savings. They needed more funds to pay for their tuition fees, textbooks, and other expenses.
-
-One day, as they were sitting in the college canteen, munching on some snacks, they overheard a conversation between two professors. One of the professors was talking about a new technology - Graphics Processing Units (GPUs) - that could revolutionize the field of machine learning.
-
-Shruti and Abhishek were intrigued. They decided to dig deeper and learn more about GPUs and machine learning. They spent countless hours reading articles, watching videos, and attending seminars. They were hooked.
-
-But they faced a new challenge - they didn't have access to a GPU. They didn't have the funds to buy one, and they couldn't afford the expensive subscription fees for cloud-based GPU services.
-
-Determined to not let this stop them, Shruti and Abhishek came up with a plan. They approached the college administration and requested permission to set up a machine learning lab on campus. They promised to cover all the expenses and even offered to donate a GPU once they had saved enough money.
-
-The administration was impressed with their initiative and agreed to their proposal. Shruti and Abhishek worked tirelessly to set up the lab, and soon, it was ready. They invited their classmates to join them and started hosting workshops and training sessions.
-
-The lab became a hub of activity, and soon, it was attracting the attention of tech companies. Shruti and Abhishek's hard work paid off, and they were offered internships at some of the top tech companies in the country.
-
-Their success story inspired many other students, and soon, the lab became a model for other colleges. Shruti and Abhishek had not only fulfilled their dreams but had also made a difference in the lives of their peers.
-
-As they walked out of the college gates, hand in hand, Shruti and Abhishek knew that their journey was just beginning. They had overcome the challenges of being out of money and had proven that with hard work, determination, and a little bit of innovation, anything was possible.

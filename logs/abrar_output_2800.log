@@ -1,23 +1,0 @@
-Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]Fetching 8 files:  12%|█▎        | 1/8 [01:52<13:08, 112.62s/it]Fetching 8 files:  38%|███▊      | 3/8 [01:52<02:26, 29.26s/it] Fetching 8 files: 100%|██████████| 8/8 [01:52<00:00, 14.10s/it]
-Loading checkpoint shards:   0%|          | 0/8 [00:00<?, ?it/s]Loading checkpoint shards:  12%|█▎        | 1/8 [00:01<00:07,  1.06s/it]Loading checkpoint shards:  25%|██▌       | 2/8 [00:02<00:06,  1.09s/it]Loading checkpoint shards:  38%|███▊      | 3/8 [00:03<00:05,  1.10s/it]Loading checkpoint shards:  50%|█████     | 4/8 [00:04<00:04,  1.10s/it]Loading checkpoint shards:  62%|██████▎   | 5/8 [00:05<00:03,  1.10s/it]Loading checkpoint shards:  75%|███████▌  | 6/8 [00:06<00:02,  1.10s/it]Loading checkpoint shards:  88%|████████▊ | 7/8 [00:07<00:01,  1.11s/it]Loading checkpoint shards: 100%|██████████| 8/8 [00:08<00:00,  1.11it/s]Loading checkpoint shards: 100%|██████████| 8/8 [00:08<00:00,  1.02s/it]
-Device set to use cuda:0
-<|user|>
-Write a story about two students ,canteen, out of money, gpu, machinelearning,</s>
-<|assistant|>
-Once upon a time, there were two computer science students, Alex and Maya, who were both passionate about learning the latest techniques in machine learning. They spent most of their time in the university's computer lab, working on their projects and experimenting with different algorithms.
-
-However, one day, they found themselves in a dilemma. They had run out of money to buy food from the canteen, and their pockets were empty. They had already missed a few meals, and the hunger pangs were starting to get the best of them.
-
-Determined to find a solution, Alex came up with an idea. He suggested that they could use their GPUs (graphics processing units) to mine cryptocurrencies like Bitcoin and Ethereum. This would not only help them earn some money but also provide them with an opportunity to learn more about blockchain technology.
-
-Maya was initially skeptical, as she had heard that mining cryptocurrencies could be a resource-intensive process that could potentially damage their machines. However, Alex convinced her that they could find a way to balance their academic work and mining activities.
-
-They started by setting up a mining rig using their GPUs and a few other components. They also joined a mining pool, which allowed them to earn a share of the rewards based on the amount of computing power they contributed.
-
-At first, the results were not impressive. They earned a few dollars here and there, but it was not enough to cover their expenses. They started to feel demotivated and considered giving up.
-
-However, they decided to keep going and optimize their mining setup. They experimented with different algorithms and tweaked the settings to improve the efficiency of their machines. They also joined a more profitable mining pool and invested in some additional hardware.
-
-Finally, their efforts paid off. They started earning a significant amount of money, enough to cover their expenses and even buy some snacks from the canteen. They also gained a deeper understanding of blockchain technology and machine learning algorithms, which helped them in their academic work.
-
-In the end, Alex and Maya learned that with determination and creativity, anything is possible. They proved that even on a tight budget, it's possible to combine academic pursuits with practical applications of technology, and they inspired other students to do the same.

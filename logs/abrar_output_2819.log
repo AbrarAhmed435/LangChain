@@ -1,16 +1,0 @@
-Loading checkpoint shards:   0%|          | 0/8 [00:00<?, ?it/s]Loading checkpoint shards:  12%|█▎        | 1/8 [00:00<00:01,  4.48it/s]Loading checkpoint shards:  25%|██▌       | 2/8 [00:00<00:01,  4.36it/s]Loading checkpoint shards:  38%|███▊      | 3/8 [00:00<00:01,  4.30it/s]Loading checkpoint shards:  50%|█████     | 4/8 [00:00<00:00,  4.30it/s]Loading checkpoint shards:  62%|██████▎   | 5/8 [00:01<00:00,  4.29it/s]Loading checkpoint shards:  75%|███████▌  | 6/8 [00:01<00:00,  4.31it/s]Loading checkpoint shards:  88%|████████▊ | 7/8 [00:01<00:00,  4.31it/s]Loading checkpoint shards: 100%|██████████| 8/8 [00:01<00:00,  4.66it/s]
-Device set to use cuda:0
-<|user|>
-Write a story about two students ,canteen, out of money, gpu, machinelearning,</s>
-<|assistant|>
-Once upon a time, in a small college in the heart of a bustling city, two students, Ananya and Rishi, found themselves in a predicament. They were both avid gamers and machine learning enthusiasts, spending most of their time in the college's computer lab. However, they had run out of money to buy snacks from the college canteen, let alone afford the expensive graphics processing units (GPUs) required for their machine learning projects.
-
-Determined to find a solution, Ananya and Rishi decided to put their knowledge of machine learning to the test. They had heard about a new technology called GPU-accelerated machine learning, which promised to significantly reduce the training time for complex neural networks. They decided to build a machine learning model that could predict the demand for snacks in the college canteen, using historical sales data.
-
-Their model, named 'SnackSense', was a huge success. It accurately predicted the demand for snacks, allowing the college canteen to order the right amount of food, reducing wastage, and increasing profits. The canteen management was impressed and offered Ananya and Rishi a commission for every sale made using their model.
-
-With their newfound income, Ananya and Rishi were able to afford the expensive GPUs required for their machine learning projects. They continued to work on their models, improving their accuracy and expanding their applications to other areas, such as predicting student attendance and exam scores.
-
-Their success caught the attention of a leading tech company, which offered them a job right after their graduation. Ananya and Rishi were thrilled to be working in the field they loved, using their knowledge of machine learning and GPUs to make a difference in the world.
-
-As they sat in their new office, surrounded by state-of-the-art machines and cutting-edge technology, they couldn't help but reflect on their journey from two poor students in a college canteen to successful machine learning experts. They knew that their passion for learning and their willingness to think outside the box had led them to where they were today, and they were excited to see where their journey would take them next.
