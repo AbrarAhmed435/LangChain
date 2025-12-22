@@ -1,0 +1,56 @@
+HOSTNAME=gpu1.nitsri.ac.in
+CUDA_VISIBLE_DEVICES=0
+/home/janib/.conda/envs/langchain/lib/python3.14/site-packages/langchain_core/_api/deprecation.py:26: UserWarning: Core Pydantic V1 functionality isn't compatible with Python 3.14 or greater.
+  from pydantic.v1.fields import FieldInfo as FieldInfoV1
+/home/scratch-scholars/Abrar/LangChain/3.EmbedingModels/6_5_part2.py:5: LangChainDeprecationWarning: The class `HuggingFaceEmbeddings` was deprecated in LangChain 0.2.2 and will be removed in 1.0. An updated version of the class exists in the `langchain-huggingface package and should be used instead. To use it run `pip install -U `langchain-huggingface` and import as `from `langchain_huggingface import HuggingFaceEmbeddings``.
+  embedding=HuggingFaceEmbeddings(
+Question: Who fixex the bug?
+Answers: The programmer fixed the bug late at night.
+
+
+Answers: A sudden rain shower cooled the busy city streets.
+
+
+Answers: The cat slept peacefully on the warm window sill.
+
+
+Question: Who enjoys books
+Answers: Abrar enjoys reading books while drinking hot coffee.
+
+
+Answers: Birds started singing as the sun rose slowly.
+
+
+Answers: A sudden rain shower cooled the busy city streets.
+
+
+Question: Who sleeps?
+Answers: The cat slept peacefully on the warm window sill.
+
+
+Answers: The programmer fixed the bug late at night.
+
+
+Answers: Abrar enjoys reading books while drinking hot coffee.
+
+
+Question: Who is singing?
+Answers: Birds started singing as the sun rose slowly.
+
+
+Answers: A sudden rain shower cooled the busy city streets.
+
+
+Answers: The programmer fixed the bug late at night.
+
+
+Question: Tell me about water?
+Answers: A sudden rain shower cooled the busy city streets.
+
+
+Answers: Birds started singing as the sun rose slowly.
+
+
+Answers: Abrar enjoys reading books while drinking hot coffee.
+
+
