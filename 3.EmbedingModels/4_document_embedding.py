@@ -5,9 +5,9 @@ embedding = HuggingFaceEmbeddings(
 )
 
 documents=[
-    "this is sentenc 1",
-    "this is sentenc 2",
-    "this is sentenc 3",
+    "this is sentence 1",
+    "this is sentence 2",
+    "this is sentence 3",
 ]
 
 result = embedding.embed_documents(documents)

@@ -19,5 +19,5 @@ echo "CUDA_VISIBLE_DEVICES=$CUDA_VISIBLE_DEVICES"
 nvidia-smi
 
 # IMPORTANT: use srun
-srun python /home/scratch-scholars/Abrar/LangChain/testing_gpu_on_janib1.py
+srun python /home/scratch-scholars/Abrar/LangChain/3.EmbedingModels/4_document_embedding.py
 
