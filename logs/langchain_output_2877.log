@@ -1,0 +1,45 @@
+HOSTNAME=gpu1.nitsri.ac.in
+CUDA_VISIBLE_DEVICES=0
+/home/janib/.conda/envs/langchain/lib/python3.14/site-packages/langchain_core/_api/deprecation.py:26: UserWarning: Core Pydantic V1 functionality isn't compatible with Python 3.14 or greater.
+  from pydantic.v1.fields import FieldInfo as FieldInfoV1
+Device set to use cuda:0
+<|user|>
+Prove mathematically that 0 raised to power 0 has a value, of 1 , and also give a detailed report of how it gives value 1.</s>
+<|assistant|>
+To prove mathematically that 0 raised to power 0 has a value of 1, we can use the following steps:
+
+1. Define the operation: 0 raised to power 0 is called the power operator, denoted by the symbol **.
+
+2. Define the value of 0 raised to power 0: 0 raised to power 0 is equal to 1.
+
+3. Prove the value of 0 raised to power 0:
+
+   a. If 0 raised to power 0 is equal to 1, then 0 raised to any power is equal to 1.
+
+   b. Let a = 0 raised to power n.
+
+   c. Since 0 raised to power 0 is equal to 1, we have a = 1.
+
+   d. Therefore, a is equal to 1.
+
+4. Prove that 0 raised to power 0 has a value:
+
+   a. Since 0 raised to power 0 is equal to 1, we have 0 raised to any power is equal to 1.
+
+   b. Let a = 0 raised to power n.
+
+   c. Since 0 raised to power 0 has a value of 1, we have a raised to any power is equal to 1.
+
+   d. Therefore, a raised to any power is equal to 1.
+
+5. Use the value of 0 raised to power 0 to calculate the value of 1 raised to any power:
+
+   a. If n is any positive integer, then 1 raised to any power is equal to n.
+
+   b. Therefore, 1 raised to any power is equal to 1.
+
+   c. Since 0 raised to power 0 has a value of 1, we have 1 raised to any power is equal to 1.
+
+   d. Therefore, 1 raised to any power is equal to 1.
+
+This proof gives the value of 0 raised to power 0 as 1.

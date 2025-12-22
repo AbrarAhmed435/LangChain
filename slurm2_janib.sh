@@ -17,7 +17,7 @@ module purge
 #conda init
 #oconda activate langchain
 source /apps/anaconda3/etc/profile.d/conda.sh
-conda activate langchain_cuda
+conda activate langchain
 
 echo "HOSTNAME=$(hostname)"
 echo "CUDA_VISIBLE_DEVICES=$CUDA_VISIBLE_DEVICES"
@@ -25,6 +25,6 @@ echo "CUDA_VISIBLE_DEVICES=$CUDA_VISIBLE_DEVICES"
 
 # Run the test script
 # python /home/scratch-scholars/Abrar/LangChain/2.ChatModels/5_1_chatmodel_hf_local.py
-python /home/scratch-scholars/Abrar/LangChain/testing_gpu_on_janib.py
+python /home/scratch-scholars/Abrar/LangChain/2.ChatModels/5_1_chatmodel_hf_local.py
 #srun --gpu-bind=single:1 python testing_gpu_on_janib.py
 
