@@ -1,0 +1,26 @@
+no change     /apps/anaconda3/condabin/conda
+no change     /apps/anaconda3/bin/conda
+no change     /apps/anaconda3/bin/conda-env
+no change     /apps/anaconda3/bin/activate
+no change     /apps/anaconda3/bin/deactivate
+no change     /apps/anaconda3/etc/profile.d/conda.sh
+no change     /apps/anaconda3/etc/fish/conf.d/conda.fish
+no change     /apps/anaconda3/shell/condabin/Conda.psm1
+no change     /apps/anaconda3/shell/condabin/conda-hook.ps1
+no change     /apps/anaconda3/lib/python3.11/site-packages/xontrib/conda.xsh
+no change     /apps/anaconda3/etc/profile.d/conda.csh
+no change     /home/janib/.bashrc
+No action taken.
+CUDA available: False
+Using device: cpu
+Traceback (most recent call last):
+  File "/home/scratch-scholars/Abrar/LangChain/testing_gpu_on_janib.py", line 17, in <module>
+    torch.cuda.synchronize()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/janib/.conda/envs/langchain/lib/python3.14/site-packages/torch/cuda/__init__.py", line 1081, in synchronize
+    _lazy_init()
+    ~~~~~~~~~~^^
+  File "/home/janib/.conda/envs/langchain/lib/python3.14/site-packages/torch/cuda/__init__.py", line 410, in _lazy_init
+    torch._C._cuda_init()
+    ~~~~~~~~~~~~~~~~~~~^^
+RuntimeError: No CUDA GPUs are available

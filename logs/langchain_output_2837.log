@@ -15,3 +15,4 @@ No action taken.
   from pydantic.v1.fields import FieldInfo as FieldInfoV1
 Loading checkpoint shards:   0%|          | 0/8 [00:00<?, ?it/s]Loading checkpoint shards:  12%|█▎        | 1/8 [00:04<00:30,  4.35s/it]Loading checkpoint shards:  25%|██▌       | 2/8 [00:58<03:19, 33.19s/it]Loading checkpoint shards:  38%|███▊      | 3/8 [03:46<07:55, 95.04s/it]Loading checkpoint shards:  50%|█████     | 4/8 [04:49<05:30, 82.61s/it]Loading checkpoint shards:  62%|██████▎   | 5/8 [07:44<05:47, 115.79s/it]Loading checkpoint shards:  75%|███████▌  | 6/8 [09:02<03:25, 102.82s/it]Loading checkpoint shards:  88%|████████▊ | 7/8 [11:32<01:58, 118.48s/it]Loading checkpoint shards: 100%|██████████| 8/8 [12:07<00:00, 91.86s/it] Loading checkpoint shards: 100%|██████████| 8/8 [12:07<00:00, 90.98s/it]
 Device set to use cpu
+slurmstepd: error: *** JOB 2837 ON gpu1 CANCELLED AT 2025-12-22T11:58:40 ***

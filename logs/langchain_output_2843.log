@@ -1,0 +1,18 @@
+no change     /apps/anaconda3/condabin/conda
+no change     /apps/anaconda3/bin/conda
+no change     /apps/anaconda3/bin/conda-env
+no change     /apps/anaconda3/bin/activate
+no change     /apps/anaconda3/bin/deactivate
+no change     /apps/anaconda3/etc/profile.d/conda.sh
+no change     /apps/anaconda3/etc/fish/conf.d/conda.fish
+no change     /apps/anaconda3/shell/condabin/Conda.psm1
+no change     /apps/anaconda3/shell/condabin/conda-hook.ps1
+no change     /apps/anaconda3/lib/python3.11/site-packages/xontrib/conda.xsh
+no change     /apps/anaconda3/etc/profile.d/conda.csh
+no change     /home/janib/.bashrc
+No action taken.
+/home/janib/.conda/envs/langchain/lib/python3.14/site-packages/langchain_core/_api/deprecation.py:26: UserWarning: Core Pydantic V1 functionality isn't compatible with Python 3.14 or greater.
+  from pydantic.v1.fields import FieldInfo as FieldInfoV1
+Loading checkpoint shards:   0%|          | 0/8 [00:00<?, ?it/s]Loading checkpoint shards:  12%|█▎        | 1/8 [00:02<00:16,  2.31s/it]Loading checkpoint shards:  25%|██▌       | 2/8 [00:40<02:20, 23.41s/it]Loading checkpoint shards:  38%|███▊      | 3/8 [01:13<02:19, 27.87s/it]Loading checkpoint shards:  50%|█████     | 4/8 [01:40<01:49, 27.41s/it]Loading checkpoint shards:  62%|██████▎   | 5/8 [02:02<01:16, 25.65s/it]Loading checkpoint shards:  75%|███████▌  | 6/8 [02:26<00:50, 25.03s/it]Loading checkpoint shards:  88%|████████▊ | 7/8 [02:59<00:27, 27.55s/it]Loading checkpoint shards: 100%|██████████| 8/8 [03:22<00:00, 26.26s/it]Loading checkpoint shards: 100%|██████████| 8/8 [03:23<00:00, 25.38s/it]
+Device set to use cpu
+slurmstepd: error: *** JOB 2843 ON gpu1 CANCELLED AT 2025-12-22T12:11:19 ***

@@ -14,4 +14,5 @@ conda activate langchain
 
 
 # Run the test script
-python /home/scratch-scholars/Abrar/LangChain/2.ChatModels/5_1_chatmodel_hf_local.py
+# python /home/scratch-scholars/Abrar/LangChain/2.ChatModels/5_1_chatmodel_hf_local.py
+python /home/scratch-scholars/Abrar/LangChain/testing_gpu_on_janib.py

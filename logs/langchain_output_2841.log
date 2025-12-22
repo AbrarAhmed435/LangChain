@@ -1,0 +1,28 @@
+no change     /apps/anaconda3/condabin/conda
+no change     /apps/anaconda3/bin/conda
+no change     /apps/anaconda3/bin/conda-env
+no change     /apps/anaconda3/bin/activate
+no change     /apps/anaconda3/bin/deactivate
+no change     /apps/anaconda3/etc/profile.d/conda.sh
+no change     /apps/anaconda3/etc/fish/conf.d/conda.fish
+no change     /apps/anaconda3/shell/condabin/Conda.psm1
+no change     /apps/anaconda3/shell/condabin/conda-hook.ps1
+no change     /apps/anaconda3/lib/python3.11/site-packages/xontrib/conda.xsh
+no change     /apps/anaconda3/etc/profile.d/conda.csh
+no change     /home/janib/.bashrc
+No action taken.
+/home/janib/.conda/envs/langchain/lib/python3.14/site-packages/langchain_core/_api/deprecation.py:26: UserWarning: Core Pydantic V1 functionality isn't compatible with Python 3.14 or greater.
+  from pydantic.v1.fields import FieldInfo as FieldInfoV1
+Loading checkpoint shards:   0%|          | 0/8 [00:00<?, ?it/s]Loading checkpoint shards:  12%|█▎        | 1/8 [00:02<00:16,  2.41s/it]Loading checkpoint shards:  25%|██▌       | 2/8 [00:40<02:21, 23.58s/it]Loading checkpoint shards:  38%|███▊      | 3/8 [01:17<02:28, 29.69s/it]Loading checkpoint shards:  50%|█████     | 4/8 [02:02<02:21, 35.49s/it]Loading checkpoint shards:  62%|██████▎   | 5/8 [02:24<01:32, 30.69s/it]Loading checkpoint shards:  75%|███████▌  | 6/8 [02:42<00:52, 26.48s/it]Loading checkpoint shards:  88%|████████▊ | 7/8 [03:02<00:24, 24.40s/it]Loading checkpoint shards: 100%|██████████| 8/8 [03:21<00:00, 22.72s/it]Loading checkpoint shards: 100%|██████████| 8/8 [03:21<00:00, 25.25s/it]
+Traceback (most recent call last):
+  File "/home/scratch-scholars/Abrar/LangChain/2.ChatModels/5_1_chatmodel_hf_local.py", line 3, in <module>
+    llm=HuggingFacePipeline.from_model_id(
+        model_id="HuggingFaceH4/zephyr-7b-beta",
+    ...<5 lines>...
+        )
+    )
+  File "/home/janib/.conda/envs/langchain/lib/python3.14/site-packages/langchain_huggingface/llms/huggingface_pipeline.py", line 256, in from_model_id
+    if device < -1 or (device >= cuda_device_count):
+       ^^^^^^^^^^^
+TypeError: '<' not supported between instances of 'str' and 'int'
+slurmstepd: error: *** JOB 2841 ON gpu1 CANCELLED AT 2025-12-22T12:04:20 ***
