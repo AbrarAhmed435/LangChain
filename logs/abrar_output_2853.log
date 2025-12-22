@@ -1,0 +1,23 @@
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files:  50%|█████     | 1/2 [02:01<02:01, 121.49s/it]Fetching 2 files: 100%|██████████| 2/2 [02:01<00:00, 60.74s/it] 
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:04<00:04,  4.98s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:07<00:00,  3.41s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:07<00:00,  3.65s/it]
+Device set to use cuda:0
+Traceback (most recent call last):
+  File "/home/gaash/Wasif/Abrar/Personal/LangChain/2.ChatModels/5_1_chatmodel_hf_local.py", line 15, in <module>
+    result=model.invoke("Prove mathematically that 0 raised to power 0 has a value, of 1 , and also give a detailed report of how it gives value 1.")
+  File "/home/gaash/.conda/envs/langchain/lib/python3.10/site-packages/langchain_core/language_models/chat_models.py", line 398, in invoke
+    self.generate_prompt(
+  File "/home/gaash/.conda/envs/langchain/lib/python3.10/site-packages/langchain_core/language_models/chat_models.py", line 1117, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+  File "/home/gaash/.conda/envs/langchain/lib/python3.10/site-packages/langchain_core/language_models/chat_models.py", line 927, in generate
+    self._generate_with_cache(
+  File "/home/gaash/.conda/envs/langchain/lib/python3.10/site-packages/langchain_core/language_models/chat_models.py", line 1221, in _generate_with_cache
+    result = self._generate(
+  File "/home/gaash/.conda/envs/langchain/lib/python3.10/site-packages/langchain_huggingface/chat_models/huggingface.py", line 752, in _generate
+    llm_input = self._to_chat_prompt(messages)
+  File "/home/gaash/.conda/envs/langchain/lib/python3.10/site-packages/langchain_huggingface/chat_models/huggingface.py", line 962, in _to_chat_prompt
+    return self.tokenizer.apply_chat_template(
+  File "/home/gaash/.conda/envs/langchain/lib/python3.10/site-packages/transformers/tokenization_utils_base.py", line 1647, in apply_chat_template
+    chat_template = self.get_chat_template(chat_template, tools)
+  File "/home/gaash/.conda/envs/langchain/lib/python3.10/site-packages/transformers/tokenization_utils_base.py", line 1825, in get_chat_template
+    raise ValueError(
+ValueError: Cannot use chat template functions because tokenizer.chat_template is not set and no template argument was passed! For information about writing templates and setting the tokenizer.chat_template attribute, please see the documentation at https://huggingface.co/docs/transformers/main/en/chat_templating
