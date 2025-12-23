@@ -27,3 +27,4 @@ scikit-learn
 
 sentence-transformers
 langchain_community
+PyPDF2
