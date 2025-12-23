@@ -1,0 +1,4 @@
+  File "/home/gaash/Wasif/Abrar/Personal/LangChain/3.EmbedingModels/7_RAG_01.py", line 84
+    compelled the young seagull to finally fly?"
+                                               ^
+SyntaxError: unterminated string literal (detected at line 84)

@@ -27,11 +27,11 @@ def pdf_to_sentences(pdf_path):
 
     return sentences
 
-SOURCE_PDF="/home/scratch-scholars/Abrar/LangChain/Documents/The_Cyclops_Story.pdf"
+SOURCE_PDF="/home/gaash/Wasif/Abrar/Personal/LangChain/Documents/jeff103-1-5.pdf"
 
 document=pdf_to_sentences(SOURCE_PDF)
 
-print(document[:5])
+#print(document[:5])
 
 embedding=HuggingFaceEmbeddings(
     model_name="sentence-transformers/all-MiniLM-L6-v2"
@@ -39,15 +39,27 @@ embedding=HuggingFaceEmbeddings(
 
 from langchain_huggingface import ChatHuggingFace,HuggingFacePipeline
 
-llm=HuggingFacePipeline.from_model_id(
-    model_id="TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+#llm1=HuggingFacePipeline.from_model_id(
+ #   model_id="TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+  #  task='text-generation',
+   # pipeline_kwargs=dict(
+    #    temperature=0.5,
+     #   max_new_tokens=1000
+#    )
+#)
+#model=ChatHuggingFace(llm=llm1)
+
+
+llm2=HuggingFacePipeline.from_model_id(
+    model_id="HuggingFaceH4/zephyr-7b-beta",
     task='text-generation',
     pipeline_kwargs=dict(
         temperature=0.5,
         max_new_tokens=1000
     )
 )
-model=ChatHuggingFace(llm=llm)
+zephyr=ChatHuggingFace(llm=llm2)
+
 
 model_2=ChatOpenAI(model='gpt-4o-mini',temperature=0.5)
 
@@ -59,7 +71,6 @@ def generate_embeddings(document):
 
 
 def calling_llm(question,answer):
-    print(f"Abrar==={answer}")
     prompt=f'''
 you are an (Retrieval Augmented Generation) RAG assistant 
 RULES:
@@ -71,7 +82,7 @@ context:{answer}
 question:{question}
 Give Answer
 '''
-    result=model.invoke(prompt)
+    result=zephyr.invoke(prompt)
     return result.content
 
 
@@ -79,18 +90,19 @@ doc_emb=generate_embeddings(document)
 
 
 
-question=""
+question = ' \"The sight of the food maddened him\". What does this suggest?'
+
 
 ques_emb=generate_embeddings(question)
 
 scores=cosine_similarity([ques_emb],doc_emb)[0]
-top_k=scores.argsort()[::-1][:4]
+top_k=scores.argsort()[::-1][:12]
 
 Answers=[]
 
 for i in top_k:
     Answers+=[document[i]]
-print(Answers)
+#print(Answers)
 
 
 print("===LLM ANSWER===")

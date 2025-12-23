@@ -12,4 +12,4 @@
 source ~/.bashrc
 conda activate langchain
 
-python /home/gaash/Wasif/Abrar/Personal/LangChain/2.ChatModels/5_1_chatmodel_hf_local.py
+python /home/gaash/Wasif/Abrar/Personal/LangChain/3.EmbedingModels/7_RAG_01.py

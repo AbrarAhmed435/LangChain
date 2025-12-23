@@ -1,0 +1,20 @@
+/home/gaash/Wasif/Abrar/Personal/LangChain/3.EmbedingModels/7_RAG_01.py:36: LangChainDeprecationWarning: The class `HuggingFaceEmbeddings` was deprecated in LangChain 0.2.2 and will be removed in 1.0. An updated version of the class exists in the `langchain-huggingface package and should be used instead. To use it run `pip install -U `langchain-huggingface` and import as `from `langchain_huggingface import HuggingFaceEmbeddings``.
+  embedding=HuggingFaceEmbeddings(
+Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]Fetching 8 files:  12%|█▎        | 1/8 [01:55<13:31, 115.94s/it]Fetching 8 files:  25%|██▌       | 2/8 [01:56<04:47, 47.84s/it] Fetching 8 files:  38%|███▊      | 3/8 [01:56<02:10, 26.13s/it]Fetching 8 files: 100%|██████████| 8/8 [01:56<00:00, 14.55s/it]
+Loading checkpoint shards:   0%|          | 0/8 [00:00<?, ?it/s]Loading checkpoint shards:  12%|█▎        | 1/8 [00:01<00:07,  1.05s/it]Loading checkpoint shards:  25%|██▌       | 2/8 [00:02<00:06,  1.08s/it]Loading checkpoint shards:  38%|███▊      | 3/8 [00:03<00:05,  1.09s/it]Loading checkpoint shards:  50%|█████     | 4/8 [00:04<00:04,  1.06s/it]Loading checkpoint shards:  62%|██████▎   | 5/8 [00:05<00:03,  1.04s/it]Loading checkpoint shards:  75%|███████▌  | 6/8 [00:06<00:02,  1.03s/it]Loading checkpoint shards:  88%|████████▊ | 7/8 [00:07<00:01,  1.02s/it]Loading checkpoint shards: 100%|██████████| 8/8 [00:07<00:00,  1.20it/s]Loading checkpoint shards: 100%|██████████| 8/8 [00:07<00:00,  1.04it/s]
+Device set to use cuda:0
+===LLM ANSWER===
+<|user|>
+
+you are an (Retrieval Augmented Generation) RAG assistant 
+RULES:
+- Answer ONLY using the provided context.
+- if you don't find context say i don't know
+- Do NOT use external knowledge.
+- Be concise and factual.
+context:['2.“The sight of the food maddened him.” What does this suggest?', 'The sight of the food maddened him.', 'How he loved to tear food that way, scrapping his beak now and again to whet  it.', 'He was floating on it, and ar ound him his family was screaming, praising him and their beaks were offering him scraps of dog-fish.', 'He waited a moment in surprise, wondering why she did not come nearer , and then, maddened by hunger , he dived at the fish.', 'He saw a vast green sea beneath him, with little ridges moving over it and he turned his beak sideways and cawed amusedly.', 'His father and mother had come aroundledge a narrow horizontal shelf projecting from a wall or (here) a cliff Reprint 2025-26  calling to him shrilly, upbraiding  him, threatening to let him starve on his ledge unless he flew away.', 'He felt the heat because he had not eaten since the previous nightfall.', 'Somehow when he had taken a little run forward to the brink of the ledge and attempted to flap his wings he became afraid.', 'He leaned out(to) whet to sharpen derisively in a manner showing someone that she/he is stupidpreening making an effort to maintain feathers Reprint 2025-26  35 Two Stories about Fl yingeagerly, tapping the rock with his feet, trying to get nearer to her as she flew across.', 'He had, in fact, seen his older brother catch his first herring  and devour it, standing on a rock, while his parents circled around raising a proud cackle.', 'He stepped slowly out to the brink of the ledge, and standing on one leg with the other leg hidden under his wing, he closed one eye, then the other ,herring a soft-finned sea fish(to) skim to move lightly just above a surface (here, the sea)upbraiding scolding 33 Two Stories about Fl ying Reprint 2025-26  34First Flight and pretended to be falling asleep.']
+question: "The sight of the food maddened him". What does this suggest?
+Give Answer
+</s>
+<|assistant|>
+The statement "The sight of the food maddened him" suggests that the person or animal in question becomes extremely eager or desperate for food when they see it. It implies a strong and intense desire or craving for sustenance. In this context, it suggests that the person or animal being referred to is experiencing hunger and becomes almost overwhelmed or frenzied at the sight of food.
