@@ -1,0 +1,5 @@
+User: Hi, I want to request a refund for my online order.
+Chatbot: Sure! I can help with that. Could you please share your order ID?
+
+User: My order ID is ORD12345. The item arrived damaged.
+Chatbot: Thanks for the details. I’ve initiated a refund request for your order. You’ll receive a confirmation email shortly.
