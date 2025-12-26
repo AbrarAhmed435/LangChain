@@ -27,7 +27,7 @@ def pdf_to_sentences(pdf_path):
 
     return sentences
 
-SOURCE_PDF="/home/gaash/Wasif/Abrar/Personal/LangChain/Documents/jeff103-1-5.pdf"
+SOURCE_PDF="/home/abrar/Desktop/Abrar/LangChain/Documents/the-theories-and-fatality-of-bermuda-triangle-52775.pdf"
 
 document=pdf_to_sentences(SOURCE_PDF)
 
@@ -50,15 +50,15 @@ from langchain_huggingface import ChatHuggingFace,HuggingFacePipeline
 #model=ChatHuggingFace(llm=llm1)
 
 
-llm2=HuggingFacePipeline.from_model_id(
-    model_id="HuggingFaceH4/zephyr-7b-beta",
-    task='text-generation',
-    pipeline_kwargs=dict(
-        temperature=0.5,
-        max_new_tokens=1000
-    )
-)
-zephyr=ChatHuggingFace(llm=llm2)
+# llm2=HuggingFacePipeline.from_model_id(
+#     model_id="HuggingFaceH4/zephyr-7b-beta",
+#     task='text-generation',
+#     pipeline_kwargs=dict(
+#         temperature=0.5,
+#         max_new_tokens=1000
+#     )
+# )
+# zephyr=ChatHuggingFace(llm=llm2)
 
 
 model_2=ChatOpenAI(model='gpt-4o-mini',temperature=0.5)
@@ -82,7 +82,7 @@ context:{answer}
 question:{question}
 Give Answer
 '''
-    result=zephyr.invoke(prompt)
+    result=model_2.invoke(prompt)
     return result.content
 
 
@@ -90,7 +90,7 @@ doc_emb=generate_embeddings(document)
 
 
 
-question = ' \"The sight of the food maddened him\". What does this suggest?'
+question = ' what was on board  USS Cyclops (1918) a 542-foot-long Navy cargoship ,that  sank somewhere between Barbados and the Chesapeake Bay'
 
 
 ques_emb=generate_embeddings(question)

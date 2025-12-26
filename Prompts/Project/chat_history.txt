@@ -1,4 +1,9 @@
 User: Hi, I want to request a refund for my online order.
 Chatbot: Sure! I can help with that. Could you please share your order ID?
 User: My order ID is ORD12345. The item arrived damaged.
-Chatbot: Thanks for the details. I’ve initiated a refund request for your order.
+Chatbot: Thanks for the details. I’ve initiated a refund request for your order.User: My name is sapna
+Chatbot: Thank you, Sapna. I have noted your name along with your order ID (ORD12345). Since the item arrived damaged, I will process the refund for you. 
+
+You should receive a confirmation email shortly, and the refund will be credited to your original payment method within a few business days. 
+
+Is there anything else I can assist you with?
