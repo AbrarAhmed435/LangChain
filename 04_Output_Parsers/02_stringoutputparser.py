@@ -10,7 +10,7 @@ llm=HuggingFaceEndpoint(
     task="text-genration"
 )
 
-model=ChatOpenAI(model='gpt-4o-mini')
+model=ChatHuggingFace(llm=llm)
 
 template1=PromptTemplate(
     template="Write a detailed report on {topic}",
