@@ -1,10 +1,9 @@
 from langchain_huggingface import ChatHuggingFace,HuggingFaceEndpoint,HuggingFacePipeline
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser, PydanticOutputParser
-from langchain_openai import ChatOpenAI
-from typing import Annotated,Literal
 
 from pydantic import BaseModel, Field
+from typing import Annotated
 
 
 
@@ -48,7 +47,9 @@ template=PromptTemplate(
 # final_op=parser.parse(result.content)
     
 # print("PARSED\n")
+
 # print(type(final_op))
+
 # print(final_op.name)
 
 chain=template | model | parser

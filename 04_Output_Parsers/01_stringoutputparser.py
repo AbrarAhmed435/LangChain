@@ -1,6 +1,7 @@
 from langchain_huggingface import ChatHuggingFace,HuggingFaceEndpoint,HuggingFacePipeline
 from langchain_core.prompts import PromptTemplate
 from langchain_openai import ChatOpenAI
+from langchain_core.output_parsers import StrOutputParser
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -29,8 +30,6 @@ prompt1=template1.invoke({
 })
 
 
-
-
 result=model_2.invoke(prompt1)
 
 prompt2=template2.invoke({
@@ -40,5 +39,9 @@ prompt2=template2.invoke({
 result1=model_2.invoke(prompt2)
 
 
-print(result1.content)
+print(type(result1.content))
 
+parser=StrOutputParser()
+result3=parser.parse(result1.content)
+
+print(result3)
