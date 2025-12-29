@@ -32,11 +32,11 @@ template=PromptTemplate(
 )
 
 
-# prompt=template.invoke({
-#     'place':'indian'
-# })
+prompt=template.invoke({
+    'place':'indian'
+})
 
-# print(f"PROMPT:{prompt}")
+print(f"PROMPT:{prompt}")
 
 
 # result=model.invoke(prompt)

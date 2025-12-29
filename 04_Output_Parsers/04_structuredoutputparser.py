@@ -39,6 +39,8 @@ prompt=template.invoke({
     'topic':'Black Hole'
 })
 
+print(prompt)
+
 
 result=model.invoke(prompt)
 
