@@ -37,17 +37,9 @@ template=PromptTemplate(
 #     'place':'indian'
 # })
 
-
-chain=template | model | parser
-
-result=chain.invoke({
-    'place':"india"
-})
-
-
 # print(f"PROMPT:{prompt}")
 
-print(f"Output:Name: {result.name} Age:{result.age}")
+
 # result=model.invoke(prompt)
 
 # print("RESULT\n")
@@ -59,3 +51,11 @@ print(f"Output:Name: {result.name} Age:{result.age}")
 # print(type(final_op))
 # print(final_op.name)
 
+chain=template | model | parser
+
+result=chain.invoke({
+    'place':"india"
+})
+
+
+print(f"Output:Name: {result.name} Age:{result.age}")
