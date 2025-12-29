@@ -25,6 +25,6 @@ echo "CUDA_VISIBLE_DEVICES=$CUDA_VISIBLE_DEVICES"
 
 # Run the test script
 # python /home/scratch-scholars/Abrar/LangChain/2.ChatModels/5_1_chatmodel_hf_local.py
-python /home/scratch-scholars/Abrar/LangChain/04_Output_Parsers/04_structuredoutputparser.py
+python /home/scratch-scholars/Abrar/LangChain/04_Output_Parsers/05_pydantic_output_parser.py
 #srun --gpu-bind=single:1 python testing_gpu_on_janib.py
 

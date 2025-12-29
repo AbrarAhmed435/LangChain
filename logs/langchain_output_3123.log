@@ -1,0 +1,8 @@
+HOSTNAME=gpu1.nitsri.ac.in
+CUDA_VISIBLE_DEVICES=0
+/home/janib/.conda/envs/langchain/lib/python3.14/site-packages/langchain_core/_api/deprecation.py:26: UserWarning: Core Pydantic V1 functionality isn't compatible with Python 3.14 or greater.
+  from pydantic.v1.fields import FieldInfo as FieldInfoV1
+Traceback (most recent call last):
+  File "/home/scratch-scholars/Abrar/LangChain/04_Output_Parsers/04_structuredoutputparser.py", line 6, in <module>
+    from output_parsers import StructuredOutputParser,ResponseSchema
+ModuleNotFoundError: No module named 'output_parsers'

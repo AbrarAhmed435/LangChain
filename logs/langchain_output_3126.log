@@ -1,0 +1,13 @@
+HOSTNAME=gpu1.nitsri.ac.in
+CUDA_VISIBLE_DEVICES=0
+/home/janib/.conda/envs/langchain/lib/python3.14/site-packages/langchain_core/_api/deprecation.py:26: UserWarning: Core Pydantic V1 functionality isn't compatible with Python 3.14 or greater.
+  from pydantic.v1.fields import FieldInfo as FieldInfoV1
+do_ypcall: clnt_call: RPC: Unable to receive; errno = Connection refused
+do_ypcall: clnt_call: RPC: Unable to receive; errno = Connection refused
+PROMPT:text='Generate the name ,age and city of fictional indian person \n The output should be formatted as a JSON instance that conforms to the JSON schema below.\n\nAs an example, for the schema {"properties": {"foo": {"title": "Foo", "description": "a list of strings", "type": "array", "items": {"type": "string"}}}, "required": ["foo"]}\nthe object {"foo": ["bar", "baz"]} is a well-formatted instance of the schema. The object {"properties": {"foo": ["bar", "baz"]}} is not well-formatted.\n\nHere is the output schema:\n```\n{"properties": {"name": {"description": "Name of Person", "title": "Name", "type": "string"}, "age": {"description": "Age of Person", "exclusiveMinimum": 18, "title": "Age", "type": "integer"}, "city": {"description": "Name of city the person belongs to", "title": "City", "type": "string"}}, "required": ["name", "age", "city"]}\n```'
+RESULT
+
+content='```json\n{\n  "name": "Arjun Singh",\n  "age": 27,\n  "city": "Bangalore"\n}\n``` \n' additional_kwargs={} response_metadata={'token_usage': {'completion_tokens': 38, 'prompt_tokens': 241, 'total_tokens': 279}, 'model_name': 'google/gemma-2-2b-it', 'system_fingerprint': None, 'finish_reason': 'stop', 'logprobs': None} id='lc_run--019b698a-754a-7233-8a4c-7dc3049ea383-0' usage_metadata={'input_tokens': 241, 'output_tokens': 38, 'total_tokens': 279}
+PARSED
+
+<class '__main__.Person'>
