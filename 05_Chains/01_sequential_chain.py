@@ -16,7 +16,9 @@ model=ChatOpenAI(model='gpt-4o-mini')
 
 parser=StrOutputParser()
 
+#################################
 chain=prompt | model | parser
+################################
 
 topic=str(input("Enter topic name "))
 
@@ -24,8 +26,6 @@ result=chain.invoke({
     'topic':topic
 })
 
-print(prompt)
+chain.get_graph().print_ascii()
 
-# print(result.content)
-
-# print(result)
+print(result)

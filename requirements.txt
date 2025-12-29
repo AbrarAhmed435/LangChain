@@ -30,3 +30,5 @@ langchain_community
 PyPDF2
 sentence-transformers
 streamlit
+
+grandalf
