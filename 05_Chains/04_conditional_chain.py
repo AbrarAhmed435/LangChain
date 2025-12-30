@@ -12,8 +12,8 @@ from email.mime.text import MIMEText
 load_dotenv()
 
 sender = "abrarnitsri0@gmail.com"
-receiver = "tavaheed_2022bite008@nitsri.ac.in"
-# receiver="abrar_2022bite057@nitsri.ac.in"
+# receiver = "tavaheed_2022bite008@nitsri.ac.in"
+receiver="abrar_2022bite057@nitsri.ac.in"
 password = "znor ifqn psaw mfwd "
 
 
@@ -73,5 +73,4 @@ server.sendmail(sender, receiver, msg.as_string())
 server.quit()
 
 print("Email sent successfully")
-
 
