@@ -29,7 +29,6 @@ parser=StrOutputParser()
  
 chain = template1 | model | parser | template2 | model | parser
 
-
 ##############################################################
 
 result=chain.invoke({

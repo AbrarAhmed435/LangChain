@@ -73,4 +73,3 @@ server.sendmail(sender, receiver, msg.as_string())
 server.quit()
 
 print("Email sent successfully")
-
