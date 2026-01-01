@@ -37,6 +37,7 @@ class NakliPromptTemplate(Runnable):
         self.input_variables=input_variables
 
     def invoke(self,input_dict):
+        
         return self.template.format(**input_dict)
 
 
@@ -70,12 +71,12 @@ template2=NakliPromptTemplate(
     
 parser=NakliStrOutputParser()
 
-chain=RunnableConnector([template,llm,parser])
+chain=RunnableConnector([template,llm])
 
 
-chain2=RunnableConnector([template2,llm,parser])
+chain2=RunnableConnector([template2,llm])
 
-chain3=RunnableConnector([chain,chain2])
+chain3=RunnableConnector([chain,chain2,parser])
 
 result=chain3.invoke({
     'topic':'India',

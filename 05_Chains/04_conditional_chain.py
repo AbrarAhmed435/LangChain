@@ -57,10 +57,7 @@ result=chain.invoke({
     'feedback':"This is terrible Product"
 })
 
-
 print(result)
-
-
 
 msg = MIMEText(result)
 msg["Subject"] = "Test Mail"

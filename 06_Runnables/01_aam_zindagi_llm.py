@@ -15,12 +15,6 @@ class NakliLLM:
         }
     
 
-
-
-
-
-
-
 class NakliPromptTemplate:
     def __init__(self,template,input_variables):
         self.template=template
@@ -28,9 +22,6 @@ class NakliPromptTemplate:
 
     def format(self,input_dict):
         return self.template.format(**input_dict)
-
-
-
 
 
 
