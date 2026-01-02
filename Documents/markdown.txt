@@ -1,0 +1,33 @@
+# 🚀 Project Name: Smart Employee Management System
+
+## 📌 Description
+A web-based application to manage employees, authentication, and roles within an organization.  
+Built with scalability, security, and clean architecture in mind.
+
+---
+
+## 🛠️ Tech Stack
+- **Backend:** Django, Django REST Framework
+- **Authentication:** JWT / Session Auth
+- **Database:** PostgreSQL
+- **Frontend:** React (optional)
+- **ORM:** Django ORM
+- **API Documentation:** Swagger / DRF Spectacular
+
+---
+
+## ✨ Features
+- Custom User Model using `AbstractUser`
+- Employee registration with:
+  - Username
+  - Phone Number
+  - Employee ID
+- Secure password handling & validation
+- Role-based access control
+- Admin dashboard
+- RESTful APIs
+- Token-based authentication
+
+---
+
+## 📂 Project Structure

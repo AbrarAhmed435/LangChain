@@ -1,29 +1,5 @@
-from dotenv import load_dotenv
-from langchain_core.prompts import PromptTemplate
-from langchain_openai import ChatOpenAI
-from langchain_core.runnables import RunnableParallel,RunnableSequence
-from langchain_core.output_parsers import StrOutputParser
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 
-load_dotenv()
-
-model=ChatOpenAI(model='gpt-4o-mini')
-
-template1=PromptTemplate(
-    template="Write a LinkedIn post about this text \n {text}",
-    input_variables=['text']
-)
-
-template2=PromptTemplate(
-    template="Write a X tweet about this text \n {text}",
-    input_variables=['text']
-)
-
-parser=StrOutputParser()
-
-parallel_chain=RunnableParallel({
-    'post':RunnableSequence(template1,model,parser),
-    'tweet':RunnableSequence(template2,model,parser)
-})
 
 text='''Love is one of the most profound and complex emotions humans experience. It goes beyond simple attraction or affection; it is a deep connection that binds people through understanding, care, and commitment. Love can exist in many forms—romantic love, familial love, friendship, and even self-love—and each plays a vital role in shaping who we are.
 
@@ -36,8 +12,11 @@ Beyond personal relationships, love influences how we interact with the world. I
 In a world often driven by speed and self-interest, love reminds us to slow down and connect. It is not always loud or dramatic; sometimes, love is found in quiet gestures—a listening ear, a shared silence, or unwavering support. Ultimately, love is not just something we feel; it is something we choose to practice every day.
 '''
 
-result=parallel_chain.invoke({
-    'text':text
-})
+splitter=RecursiveCharacterTextSplitter(
+    chunk_size=200,
+    chunk_overlap=0
+)
+chunks=splitter.split_text(text)
 
-print(result)
+print(len(chunks))
+print(chunks)
