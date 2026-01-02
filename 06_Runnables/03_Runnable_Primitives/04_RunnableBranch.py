@@ -16,13 +16,11 @@ prompt1=PromptTemplate(
 prompt2=PromptTemplate(
     template="Summarize the following text \n {text}",
     input_variables=['text']
-
 )
 
 parser=StrOutputParser()
 
 report_gen_chain=RunnableSequence(prompt1,model,parser)
-
 
 branch_chain=RunnableBranch(
     (lambda x:len(x.split())>200,RunnableSequence(prompt2,model,parser)),
