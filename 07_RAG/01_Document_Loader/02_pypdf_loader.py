@@ -12,7 +12,7 @@ loader=PyPDFLoader('/home/abrar/Desktop/Abrar/LangChain/Documents/brief-on-Hallm
 docs=loader.load()
 
 print(len(docs)) # length is equal to number of pages
-print(docs[0].page_content) 
+print(docs[1].page_content) 
 
 
 
