@@ -21,7 +21,7 @@ embeddings = [embedding.embed_query(s) for s in sentences]
 chunks = []
 start = 0
 end = 0
-threshold = 0.6
+threshold = 0.45
 
 for i in range(len(embeddings) - 1):
     cosine = np.dot(embeddings[i], embeddings[i + 1]) / (
