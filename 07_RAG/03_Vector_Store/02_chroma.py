@@ -18,7 +18,7 @@ collection.add(
 from pprint import pprint
 
 results=collection.query(
-    query_texts=['I am rought surface'],
+    query_texts=['I have rough surface'],
     n_results=2
 )
 
