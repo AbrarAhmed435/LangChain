@@ -11,7 +11,8 @@ urlpatterns=[
     path('login/',LoginView.as_view(),name='login'),
     path('token/refresh/',TokenRefreshView.as_view(),name="refresh"),
     path("upload-pdf/",DocumentUploadView.as_view(),name="upload-pdf"),
-    path('ask/',AskQuestionView.as_view(),name="ask")
+    path('ask/',AskQuestionView.as_view(),name="ask"),
+    path('get-users/',GetUsersView.as_view(),name="list-user"),
 ]
 
 if settings.DEBUG:

@@ -15,12 +15,8 @@ class RegisterSerializer(serializers.ModelSerializer):
     
     def validate(self, attrs):
         if attrs['password'] != attrs['confirm_password']:
-            raise serializers.ValidationError("Passwords do not match")
+            raise serializers.ValidationError({"message":"Password's didn't match"})
         return attrs
-    def validate_email(self, value):
-        if CustomUser.objects.filter(email=value).exists():
-            raise serializers.ValidationError({"message": "user with mail already exists"})
-        return value
 
     def create(self,validated_data):
         validated_data.pop('confirm_password')
@@ -31,6 +27,11 @@ class RegisterSerializer(serializers.ModelSerializer):
             password=validated_data['password']
         )
         return user
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=CustomUser
+        fields=['id','email']
     
     #DRF calls create() automatically when you call .save() on the serializer
     

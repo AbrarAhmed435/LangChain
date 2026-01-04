@@ -6,22 +6,33 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from langchain_community.document_loaders import PyMuPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
+from rest_framework import generics
 from api.chroma import vector_store
 
 from api.serializers import *
 
-class RegisterView(APIView):
-    permission_classes=[permissions.AllowAny]
+# class RegisterView(APIView):
+#     permission_classes=[permissions.AllowAny]
+#     def post(self,request):
+#         serializer=RegisterSerializer(data=request.data)
+#         serializer.is_valid(raise_exception=True)
+#         user=serializer.save()
+#         return Response({
+#             "message":"User Registered Successfully",
+#             "user_id":user.id,
+#             "user_name":user.username
+#         },status=status.HTTP_201_CREATED)
+    
+class RegisterView(generics.CreateAPIView):
+    serializer_class=RegisterSerializer
 
-    def post(self,request):
-        serializer=RegisterSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        user=serializer.save()
-        return Response({
-            "message":"User Registered Successfully",
-            "user_id":user.id,
-            "user_name":user.username
-        },status=status.HTTP_201_CREATED)
+
+
+class GetUsersView(generics.ListAPIView):
+    permission_classes=[permissions.AllowAny]
+    queryset=CustomUser.objects.all()
+    serializer_class=UserSerializer
+
 
 class LoginView(APIView):
     permission_classes=[permissions.AllowAny]
