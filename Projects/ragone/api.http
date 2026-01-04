@@ -25,3 +25,12 @@ Content-Type: application/json
 {
     "refresh":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc2NzYyODg0NSwiaWF0IjoxNzY3NDU2MDQ1LCJqdGkiOiJkM2RjMDY4ZGI0YjU0ZGNjYjlkMzQ5YjllYWFjNTNlMCIsInVzZXJfaWQiOiIxIn0.be0g-MSn18szOb-sddRydboY0bFqNKl6ZZHenpUdqlQ"
 }
+
+###
+POST http://localhost:8000/api/ask/ HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY3NTEwOTkwLCJpYXQiOjE3Njc1MDczOTAsImp0aSI6ImE2ODY4NjBjYjBmODQwNmFiOTU3MzdjMTU3NjIxODA5IiwidXNlcl9pZCI6IjEifQ.DYALp0KFifPZNM_0dxfsp882ffLFeFs3MczoKwicA-8
+
+{
+    "question":"Thus began the hero’s long and fateful journey"
+}

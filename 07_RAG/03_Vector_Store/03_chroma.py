@@ -40,18 +40,18 @@ print("Number of embeddings:", len(info["ids"]))
 # pprint(info)
 
 search_result=vector_store.similarity_search(
-    query='What is name of islan',
+    query='What is name of island',
     k=1
 )
 search_result=vector_store.similarity_search_with_score(
-    query='What is name of islan',
+    query='What is name of island',
     k=1,
     # filter={"size","large"}
 )
 
 print(type(search_result))
 
-print(len)
+# print(len)
 
 
 ####UPDATED EXITING DOCUMENT

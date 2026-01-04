@@ -23,6 +23,7 @@ class Document(models.Model):
 
     def __str__(self):
         return f"{self.name} ({self.user})"
+    
 class DocumentChunk(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     document = models.ForeignKey(

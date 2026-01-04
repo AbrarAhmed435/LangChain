@@ -60,3 +60,5 @@ class DocumentUploadSerializer(serializers.ModelSerializer):
         user=self.context["request"].user
         return Document.objects.create(user=user,**validated_data)
     
+class QuestionSerializer(serializers.Serializer):
+    question=serializers.CharField()
