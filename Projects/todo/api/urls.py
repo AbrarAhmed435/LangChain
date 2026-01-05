@@ -8,4 +8,6 @@ urlpatterns=[
     path('register/',RegisterView.as_view(),name="register"),
     path('login/',LoginView.as_view(),name='login'),
     path('token/refresh/',TokenRefreshView.as_view(),name='refresh'),
+    path('list-create/task/',CreateListTaskView.as_view(),name='task'),
+    path('get/update/delete/<uuid:pk>/',RetrieveUpdataeDeleteView.as_view(),name="nothing"),
 ]

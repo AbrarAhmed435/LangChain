@@ -26,3 +26,23 @@ class LoginView(APIView):
             "refresh":str(refresh)
         },status=status.HTTP_200_OK)
 
+
+class CreateListTaskView(generics.ListCreateAPIView):
+    permission_classes=[permissions.IsAuthenticated]
+    serializer_class=TaskSerializer
+
+    # All users will see all Tasks
+    # def get_queryset(self):
+    #     return super().get_queryset()
+    def get_queryset(self):
+        return Task.objects.filter(user=self.request.user)
+    
+    def perform_create(self,serializer):
+        serializer.save(user=self.request.user)
+
+class RetrieveUpdataeDeleteView(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes=[permissions.IsAuthenticated]
+    serializer_class=TaskSerializer
+
+    def get_queryset(self):
+        return Task.objects.filter(user=self.request.user)

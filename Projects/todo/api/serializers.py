@@ -44,3 +44,9 @@ class LoginSerializer(serializers.Serializer):
             raise serializers.ValidationError("Invalid Credentials")
         attrs['user']=user
         return attrs
+    
+class TaskSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=Task
+        fields=['id','title','description','created_at']
+        read_only_fields=['id','created_at']
