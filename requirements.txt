@@ -38,3 +38,5 @@ django
 django_rest_framework
 django_rest_framework_jwt
 django_extensions
+wikipedia
+wikipedia-api
