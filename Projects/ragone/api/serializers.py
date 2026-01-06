@@ -56,6 +56,25 @@ class DocumentUploadSerializer(serializers.ModelSerializer):
         model=Document
         fields=["id","name","file"]
         read_only_fields=["id"]
+   # DRF automatically calls validation methods during serializer.is_valid()(this line is in views):
+# 1. For each field, if validate_<fieldname>() exists → it is called
+#    e.g. validate_name(), validate_file()
+# 2. Then validate(self, attrs) is called (object-level validation)
+# 3. Only if all validations pass → serializer.save() is executed
+
+    # def validate_name(self,value):
+    #     print("inside validate name")
+    #     return value
+
+    def validate_file(self, file):
+        if not file.name.lower().endswith(".pdf"):
+            raise serializers.ValidationError("Upload PDF files only")
+
+        
+        if file.content_type != "application/pdf":
+            raise serializers.ValidationError("Invalid file type")
+
+        return file
 
     def create(self,validated_data):
         user=self.context["request"].user

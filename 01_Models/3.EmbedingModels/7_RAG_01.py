@@ -30,6 +30,7 @@ def pdf_to_sentences(pdf_path):
 SOURCE_PDF="/home/abrar/Desktop/Abrar/LangChain/Documents/the-theories-and-fatality-of-bermuda-triangle-52775.pdf"
 
 document=pdf_to_sentences(SOURCE_PDF)
+print(len(document))
 
 #print(document[:5])
 

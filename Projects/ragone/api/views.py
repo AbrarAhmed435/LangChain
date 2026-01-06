@@ -76,7 +76,7 @@ class DocumentUploadView(APIView):
         docs=loader.load()
 
         splitter=RecursiveCharacterTextSplitter(
-            chunk_size=150,
+            chunk_size=300,
             chunk_overlap=20,
             separators=["\n\n", "\n", " ", ""]
         )
@@ -112,22 +112,31 @@ class AskQuestionView(APIView):
 
         question=serializer.validated_data["question"]
 
+        # retriever=vector_store.as_retriever(
+        #     search_type="mmr",
+        #     search_kwargs={"k":3,"lambda_mult":0.3},
+        #     filter={
+        #         "user_id":request.user.id
+        #     }
+        # )
+        # results=retriever.invoke(question)
         results=vector_store.similarity_search_with_score(
             query=question,
-            k=2,
+            k=4,
             filter={
                 "user_id":request.user.id
             }
         )
 
         response_data=[]
-        for doc , score in results:
+        for doc,score in results:
             response_data.append({
                 "content":doc.page_content,
                 "score":score,
                 "document_id":doc.metadata.get("document_id")
             })
-        print(response_data[0]['content'])
+        # if len(response_data):
+        #     print(response_data[0])
         return Response({
             "Question":question,
             "results":response_data

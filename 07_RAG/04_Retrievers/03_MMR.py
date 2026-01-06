@@ -10,11 +10,11 @@ embedding = HuggingFaceEmbeddings(
     model_name="sentence-transformers/all-MiniLM-L6-v2"
 )
 
-# vector_store=Chroma(
-#     embedding_function=embedding,
-#     persist_directory='my-chroma',
-#     collection_name='sample_docs'
-# )
+vector_store=Chroma(
+    embedding_function=embedding,
+    persist_directory='my-chroma',
+    collection_name='sample_docs'
+)
 
 
 document_1 = Document(
@@ -61,7 +61,7 @@ document_7 = Document(
 
 document_8 = Document(
     page_content="LangGraph is the best framework for building stateful, agentic applications!",
-    metadata={"source": "tweet"},
+    metadata={"source": "abrar"},
     id=8,
 )
 
@@ -96,11 +96,13 @@ documents = [
     document_11
 ]
 
-vector_store=FAISS.from_documents(
-    documents=documents,
-    embedding=embedding
-)
+# vector_store=FAISS.from_documents(
+#     documents=documents,
+#     embedding=embedding
+# )
+uuids = [str(uuid4()) for _ in range(len(documents))]
 
+vector_store.add_documents(documents=documents, ids=uuids)
 # import os
 # if not os.path.exists('faiss_db'):
 #     vector_store.save_local("faiss_db")
@@ -108,12 +110,16 @@ vector_store=FAISS.from_documents(
 retreiver=vector_store.as_retriever(
     search_type="mmr",
     search_kwargs={"k":2,"lambda_mult":0.2},
+    filter={
+        "source":"tweet"
+    }
     )
 ##### range of lambda_mult is [0,1] 0->completerly diffrenet result, 1-> include similar results , 
 
 
 query="chocolate chip pancakes and scrambled eggs"
 results=retreiver.invoke(query)
+print(type(results))
 
 for r in results:
-    print(r.page_content)
+    print(r)
