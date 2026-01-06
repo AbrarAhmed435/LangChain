@@ -63,7 +63,7 @@ class DocumentUploadSerializer(serializers.ModelSerializer):
 # 3. Only if all validations pass → serializer.save() is executed
 
     # def validate_name(self,value):
-    #     print("inside validate name")
+    #     print(f"name= {value}")
     #     return value
 
     def validate_file(self, file):
