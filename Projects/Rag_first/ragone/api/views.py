@@ -10,13 +10,14 @@ from rest_framework import generics
 from api.chroma import vector_store
 from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
+from api.serializers import *
 
 load_dotenv()
 
 model=ChatOpenAI(model='gpt-4o-mini')
 
 
-from api.serializers import *
+
 
 # class RegisterView(APIView):
 #     permission_classes=[permissions.AllowAny]
