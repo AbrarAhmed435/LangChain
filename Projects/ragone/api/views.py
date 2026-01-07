@@ -116,6 +116,15 @@ class DestroyDocumentView(generics.DestroyAPIView):
 
     def get_queryset(self):
         return Document.objects.filter(user=self.request.user)
+    
+    def perform_destroy(self, instance):
+        vector_store.delete(
+            where={
+                # "user_id":self.request.user.id,
+                "document_id":str(instance.id),
+            }
+        )
+        instance.delete() # default perform_destroy() has only this line 
 
 
 class AskQuestionView(APIView):
@@ -152,11 +161,14 @@ class AskQuestionView(APIView):
             })
         # if len(response_data):
         #     print(response_data[-1])
-        llm_answer=model.invoke(f"Give answer based on mathing sentences, Question= {question} Anwers= \n {response_data}")
+        if len(response_data):
+            llm_answer=model.invoke(f"Give answer based on mathing sentences, Question= {question} Anwers= \n {response_data}").content
+        else:
+            llm_answer="No Document Found"
         return Response({
             "Question":question,
             "results":response_data,
-            "llm_answer":llm_answer.content
+            "llm_answer":llm_answer
         },status=status.HTTP_200_OK)
 
 
