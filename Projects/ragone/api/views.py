@@ -8,6 +8,13 @@ from langchain_community.document_loaders import PyMuPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from rest_framework import generics
 from api.chroma import vector_store
+from langchain_openai import ChatOpenAI
+from dotenv import load_dotenv
+
+load_dotenv()
+
+model=ChatOpenAI(model='gpt-4o-mini')
+
 
 from api.serializers import *
 
@@ -74,6 +81,7 @@ class DocumentUploadView(APIView):
 
         loader=PyMuPDFLoader(document.file.path)
         docs=loader.load()
+        # print(len(docs))
 
         splitter=RecursiveCharacterTextSplitter(
             chunk_size=300,
@@ -82,9 +90,8 @@ class DocumentUploadView(APIView):
         )
 
         chunks=splitter.split_documents(docs)
-
-        info = vector_store.get()
-        print("Number of embeddings:", len(info["ids"]))
+        # print(len(chunks))
+        # print(chunks[-1].page_content)
 
         for chunk in chunks:
             chunk.metadata={
@@ -101,6 +108,14 @@ class DocumentUploadView(APIView):
             "name":document.name,
             "message":"pdf uploaded successfully"
         },status=status.HTTP_201_CREATED)
+
+
+class DestroyDocumentView(generics.DestroyAPIView):
+    permission_classes=[permissions.IsAuthenticated]
+    serializer_class=[DocumentUploadSerializer]
+
+    def get_queryset(self):
+        return Document.objects.filter(user=self.request.user)
 
 
 class AskQuestionView(APIView):
@@ -136,10 +151,12 @@ class AskQuestionView(APIView):
                 "document_id":doc.metadata.get("document_id")
             })
         # if len(response_data):
-        #     print(response_data[0])
+        #     print(response_data[-1])
+        llm_answer=model.invoke(f"Give answer based on mathing sentences, Question= {question} Anwers= \n {response_data}")
         return Response({
             "Question":question,
-            "results":response_data
+            "results":response_data,
+            "llm_answer":llm_answer.content
         },status=status.HTTP_200_OK)
 
 

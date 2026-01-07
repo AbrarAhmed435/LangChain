@@ -13,6 +13,7 @@ urlpatterns=[
     path("upload-pdf/",DocumentUploadView.as_view(),name="upload-pdf"),
     path('ask/',AskQuestionView.as_view(),name="ask"),
     path('get-users/',GetUsersView.as_view(),name="list-user"),
+    path('document/delete/<uuid:pk>/',DestroyDocumentView.as_view(),name="nothing"),
 ]
 
 if settings.DEBUG:
