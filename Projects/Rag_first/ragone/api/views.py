@@ -95,10 +95,10 @@ class DocumentUploadView(APIView):
         # print(chunks[-1].page_content)
 
         for chunk in chunks:
-            chunk.metadata={
+            chunk.metadata.update({
                 "user_id":request.user.id,
                 "document_id":str(document.id)
-            }
+            })
 
         vector_store.add_documents(chunks)
         info = vector_store.get()
