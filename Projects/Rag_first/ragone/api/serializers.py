@@ -82,3 +82,11 @@ class DocumentUploadSerializer(serializers.ModelSerializer):
     
 class QuestionSerializer(serializers.Serializer):
     question=serializers.CharField()
+
+class YoutubeUploadSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=YoutubeVideo
+        fields=['id','name','url']
+        read_only_fields=['id']
+
+        

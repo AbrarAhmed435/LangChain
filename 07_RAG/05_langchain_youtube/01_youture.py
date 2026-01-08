@@ -6,14 +6,6 @@ from  dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
 
 
-load_dotenv()
-
-model=ChatOpenAI(model='gpt-4o-mini')
-
-embedding=HuggingFaceBgeEmbeddings(
-    model_name="sentence-transformers/all-MiniLM-L6-v2"
-)
-
 
 loader=YoutubeLoader.from_youtube_url(
     "https://youtu.be/FB_kOSHk1DM?si=PhFX5q6GmYQXBuLu",

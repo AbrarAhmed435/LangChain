@@ -16,8 +16,6 @@ embedding=HuggingFaceBgeEmbeddings(
 
 
 loader=YoutubeLoader.from_youtube_url(
-    # "https://youtu.be/FBFaOin0gmE?si=-uokraXZ0l4XlLjz",
-    # "https://youtube.com/shorts/gqJlqdBv1H0?si=Kyy7-0dia9P-3iHU",
     "https://youtu.be/FB_kOSHk1DM?si=PhFX5q6GmYQXBuLu",
     add_video_info=False,
     # language=["hi","en","id"],

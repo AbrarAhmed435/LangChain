@@ -9,14 +9,15 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from rest_framework import generics
 from api.chroma import vector_store
 from langchain_openai import ChatOpenAI
+from langchain_community.document_loaders import YoutubeLoader
+from langchain_community.document_loaders.youtube import TranscriptFormat
 from dotenv import load_dotenv
+from urllib.parse import urlparse, parse_qs
 from api.serializers import *
 
 load_dotenv()
 
 model=ChatOpenAI(model='gpt-4o-mini')
-
-
 
 
 # class RegisterView(APIView):
@@ -127,6 +128,55 @@ class DestroyDocumentView(generics.DestroyAPIView):
         )
         instance.delete() # default perform_destroy() has only this line 
 
+class YoutubeUploadView(generics.ListCreateAPIView):
+    permission_classes=[permissions.IsAuthenticated]
+    serializer_class=YoutubeUploadSerializer
+
+    def get_queryset(self):
+        return YoutubeVideo.objects.filter(user=self.request.user)
+    
+    def extract_video_id(url: str) -> str | None:
+        parsed = urlparse(url)
+
+        # youtu.be/<id>
+        if parsed.netloc in ("youtu.be", "www.youtu.be"):
+            return parsed.path.lstrip("/")
+
+        # youtube.com/watch?v=<id>
+        if parsed.path == "/watch":
+            return parse_qs(parsed.query).get("v", [None])[0]
+
+        # youtube.com/shorts/<id>
+        if parsed.path.startswith("/shorts/"):
+            return parsed.path.split("/")[2]
+
+        return None
+
+    def perform_create(self,serializer):
+
+        loader=YoutubeLoader.from_youtube_url(
+            self.request.url,
+            add_video=False,
+            language=['en','hi'],
+            transcript_format=TranscriptFormat.CHUNKS,
+            chunk_size_seconds=40
+        )
+        docs=loader.load()
+        video_id=self.extract_video_id(self.request.url)
+        if not video_id:
+            return Response({
+                "message":"Invalid video Id"
+            },status=status.HTTP_400_BAD_REQUEST)
+        for doc in docs:
+            doc.metadata.update({
+                "user_id":self.user.id,
+                "source":"youtube",
+                "video_id":video_id
+            })
+        vector_store.add_documents(docs)
+        
+        serializer.save(user=self.request.user)
+    
 
 class AskQuestionView(APIView):
     permission_classes=[permissions.IsAuthenticated]
