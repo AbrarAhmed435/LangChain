@@ -88,5 +88,8 @@ class YoutubeUploadSerializer(serializers.ModelSerializer):
         model=YoutubeVideo
         fields=['id','name','url']
         read_only_fields=['id']
-
+    def validate_url(self,value):
+        if "youtube.com" not in value and "youtu.be" not in value:
+            raise serializers.ValidationError("Invalid Youtube URL")
+        return value
         

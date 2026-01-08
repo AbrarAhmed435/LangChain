@@ -34,7 +34,8 @@ class YoutubeVideo(models.Model):
         )
     name=models.CharField(max_length=200)
     url=models.URLField(max_length=300)
-    created_at=models.DateTimeField(auto_now_add=True)
+    video_id=models.CharField(max_length=20)
+    created_at=models.DateTimeField(auto_now_add=True,blank=True,null=True)
 
 
     

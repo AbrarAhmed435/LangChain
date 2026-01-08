@@ -14,6 +14,7 @@ urlpatterns=[
     path('ask/',AskQuestionView.as_view(),name="ask"),
     path('get-users/',GetUsersView.as_view(),name="list-user"),
     path('document/delete/<uuid:pk>/',DestroyDocumentView.as_view(),name="nothing"),
+    path('upload/youtube/url/',YoutubeUploadView.as_view(),name="youtube_url")
 ]
 
 if settings.DEBUG:

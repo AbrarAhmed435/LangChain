@@ -135,7 +135,7 @@ class YoutubeUploadView(generics.ListCreateAPIView):
     def get_queryset(self):
         return YoutubeVideo.objects.filter(user=self.request.user)
     
-    def extract_video_id(url: str) -> str | None:
+    def extract_video_id(self,url: str) -> str | None:
         parsed = urlparse(url)
 
         # youtu.be/<id>
@@ -153,29 +153,37 @@ class YoutubeUploadView(generics.ListCreateAPIView):
         return None
 
     def perform_create(self,serializer):
+        youtube_url=serializer.validated_data['url']
+        video_id=self.extract_video_id(youtube_url)
+
+        if not video_id:
+            raise serializers.ValidationError("Invalid Youtube URL")
+        
+        video=serializer.save(
+            user=self.request.user,
+            video_id=video_id
+        )
 
         loader=YoutubeLoader.from_youtube_url(
-            self.request.url,
-            add_video=False,
+            youtube_url,
+            add_video_info=False,
             language=['en','hi'],
             transcript_format=TranscriptFormat.CHUNKS,
             chunk_size_seconds=40
         )
-        docs=loader.load()
-        video_id=self.extract_video_id(self.request.url)
-        if not video_id:
-            return Response({
-                "message":"Invalid video Id"
-            },status=status.HTTP_400_BAD_REQUEST)
+        try:
+            docs=loader.load()
+        except Exception as e:
+            video.delete()
+            raise serializers.ValidationError("Could not fetch Youtube transcript")
         for doc in docs:
             doc.metadata.update({
-                "user_id":self.user.id,
+                "user_id":self.request.user.id,
                 "source":"youtube",
-                "video_id":video_id
+                "document_id":str(video.id),
+                "video_id":video_id,
             })
         vector_store.add_documents(docs)
-        
-        serializer.save(user=self.request.user)
     
 
 class AskQuestionView(APIView):
