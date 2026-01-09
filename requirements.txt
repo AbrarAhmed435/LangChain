@@ -42,3 +42,6 @@ wikipedia
 wikipedia-api
 youtube-transcript-api
 pytube
+duckduckgo-search
+langchain_experimental
+langchain-google-community
