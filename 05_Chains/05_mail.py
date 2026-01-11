@@ -3,7 +3,7 @@ from email.mime.text import MIMEText
 
 # Email details
 sender = "abrarnitsri0@gmail.com"
-receiver = "tavaheed_2022bite008@nitsri.ac.in"
+receiver = "abrar_2022bite057@nitsri.ac.in"
 password = "znor ifqn psaw mfwd "
 
 msg = MIMEText("Hello from Langchain \n Krish ka sune ga krish ka")

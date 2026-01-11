@@ -1,5 +1,5 @@
 """
-4️⃣ AI Email Sender (Agent-style) 📧
+ AI Email Sender (Agent-style) 📧
 
 Idea
 

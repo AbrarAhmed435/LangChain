@@ -1,4 +1,4 @@
-from langchain_core.tools import tool
+from langchain_core.tools import tool,InjectedToolArg
 from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
 from langchain_core.messages import HumanMessage, AIMessage, ToolMessage
@@ -21,10 +21,10 @@ def get_conversion_factor(base_currency: str, target_currency: str) -> float:
 def convert(source_amount: float, conversion_factor: float) -> float:
     return source_amount * conversion_factor
 
-query = HumanMessage("""I need to convert 50 Indian rupees (INR) to USD. 
+query = HumanMessage("""I need to convert 900 Indian rupees (INR) to USD. 
 Please do this step by step:
 1. First find the current conversion rate from INR to USD
-2. Then use that rate to convert 50 INR to USD""")
+2. Then use that rate to convert 900 INR to USD""")
 
 llm_with_tools = model.bind_tools([get_conversion_factor, convert])
 messages = [query]
