@@ -20,21 +20,19 @@ model=ChatOpenAI(model='gpt-4o-mini')
 # TOOL BINDING
 llm_with_tool=model.bind_tools([multiply])
 
-result=llm_with_tool.invoke("Hi, How are you?")
 
-print(result.content)
-print()
+query=HumanMessage("Can you multiply 35 with 10")
 
-result=llm_with_tool.invoke("Can you multiple 3 and 10")
-# print(result)
-# print()
-pprint(result.tool_calls)
+messages=[query]
 
-"""
-The llm doesn't run the tool, it just suggests the tool and the input arguments. the actual executin is handled by LangChain or by Programmer
-"""
 
-print(multiply.invoke(result.tool_calls[0]['args']))
-print()
+result=llm_with_tool.invoke(messages)
+messages.append(result)
+# print(messages)
 
-print(multiply.invoke(result.tool_calls[0]))
+tool_result=multiply.invoke(result.tool_calls[0])
+messages.append(tool_result)
+
+# print(messages)
+final_result=llm_with_tool.invoke(messages)
+print(final_result)
