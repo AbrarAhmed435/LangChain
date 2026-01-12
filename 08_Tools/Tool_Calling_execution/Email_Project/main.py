@@ -5,48 +5,114 @@ from langchain_core.messages import HumanMessage,ToolMessage
 from langchain_google_genai import ChatGoogleGenerativeAI
 from typing import Annotated
 import json
+import smtplib
+from email.mime.text import MIMEText
+from pydantic import BaseModel, Field
+import os
 
 load_dotenv()
 
 model=ChatOpenAI(model='gpt-4o-mini')
 # model=ChatGoogleGenerativeAI(model="gemini-2.5-flash")
 
+class MailResponse(BaseModel):
+    subject:Annotated[str,Field(max_length=100,description="This is the subject of Mail")]
+    body:Annotated[str,Field(max_length=500,description="This is body of mail")]
+
+
 @tool("get_mail_id_from_db",description="Tool that fetches mail id of user from database")
 def getMail(name:str)->str:
-    with open('db.json','r') as f:
-        data=json.load(f)
-    email=None
-    for user in data:
-        if user['name'].lower()==name.lower():
-            email=user['email']
-    return email
+    try:
+        with open("db.json","r") as f:
+            data=json.load(f)
+        for user in data:
+            if user.get("name","").lower()==name.lower():
+                return user.get("email")
+    except FileNotFoundError:
+        print("file not found")
+        return ""
+    except json.JSONDecodeError:
+        print("by")
+        return ""
+    
+def generate_mail():
+    structured_model=model.with_structured_output(MailResponse)
+    return structured_model.invoke(user_query)
 
 @tool("sending_mail",description="Sending mail to give mail_id")
 def sendMail(mail_id:str)->str:
-    import smtplib
-    from email.mime.text import MIMEText
-    sender="abrarnitsri0@gmail.com"
-    receiver=mail_id
-    password = "znor ifqn psaw mfwd "
-    msg=MIMEText("This is a Automated email, send by AI Agent")
-    msg['Subject']="Test Mail"
-    msg['From']=sender
-    msg["To"]=receiver
-    server=smtplib.SMTP("smtp.gmail.com",587)
-    server.starttls()
-    server.login(sender,password)
-    server.sendmail(sender,receiver,msg.as_string())
-    server.quit()
-    return True
+    try:
+        sender=os.getenv("EMAIL_SENDER")
+        receiver=mail_id
+        password =os.getenv("EMAIL_PASSWORD")
+        if not sender or not password:
+            return "Email Credentials not configured"
+        my_mail=generate_mail()
+        msg=MIMEText(my_mail.body)
+        msg['Subject']=my_mail.subject
+        msg['From']=sender
+        msg["To"]=receiver
+        server=smtplib.SMTP("smtp.gmail.com",587)
+        server.starttls()
+        server.login(sender,password)
+        server.sendmail(sender,receiver,msg.as_string())
+        server.quit()
+        return "Email send Successfully"
+    except smtplib.SMTPException as e:
+        return "SMTP error while sending mail"
+    
+    except Exception as e:
+        return "Unknown error while sending mail"
 
+def generate_mail_template():
+    structured_model=model.with_structured_output(MailResponse)
+    return structured_model.invoke(f"""Write a email template for this intent
+        Rules:
+            1. User {{name}} as placeholder for name
+            2.Do not personalize beyond {{name}}
+            Intent:{user_query}
+"""
+    )
+    
 
-llm_with_tools=model.bind_tools([getMail,sendMail])
+@tool("Mail_to_all",description="This tool sends mail to all users that are in database ")
+def send_mail_to_all(intent):
+    template=generate_mail_template()
 
-messages=[HumanMessage("Send a Mail to Tawheed Tariq , inviting him to party tomorrow")]
+    with open('db.json','r') as f:
+        data=json.load(f)
+    
+    for user in data:
+        name=user['name']
+        receiver=user['email']
+        mail_subject=template.subject
+        mail_body= template.body.replace("{{name}}", name)
+        sender=os.getenv("EMAIL_SENDER")
+        password =os.getenv("EMAIL_PASSWORD")
+        if not sender or not password:
+            return "Email Credentials not configured"
+        my_mail=generate_mail()
+        msg=MIMEText(mail_body)
+        msg['Subject']=mail_body
+        msg['From']=sender
+        msg["To"]=receiver
+        server=smtplib.SMTP("smtp.gmail.com",587)
+        server.starttls()
+        server.login(sender,password)
+        server.sendmail(sender,receiver,msg.as_string())
+        server.quit()
+        return "Email send Successfully"
+    
+
+llm_with_tools=model.bind_tools([getMail,sendMail,send_mail_to_all])
+
+user_query=input("Write you query here")
+
+messages=[HumanMessage(user_query)]
 
 test_result=llm_with_tools.invoke(messages)
 
-print(test_result.tool_calls[0]['name'])
+print(test_result.tool_calls[0])
 messages.append(test_result)
 
 for tool_call in test_result.tool_calls:
@@ -59,9 +125,17 @@ for tool_call in test_result.tool_calls:
                 tool_call_id=tool_call['id']
             )
         )
-        # else:
-        #     error=["Email id not found in database"]
-        #     messages.append(error)
+    elif tool_call['name']=='Mail_to_all':
+        status=send_mail_to_all.invoke(user_query)
+
+        messages.append(
+            ToolMessage(
+                content=status,
+                tool_call_id=tool_call['id']
+            )
+        )
+
+        
 
 result=llm_with_tools.invoke(messages)
 messages.append(result)

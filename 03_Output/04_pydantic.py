@@ -39,4 +39,4 @@ Review by "Barack Obama"
 
 result=structured_model.invoke(review)
 
-print(result.name)
+print(result)
