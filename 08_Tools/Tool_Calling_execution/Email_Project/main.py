@@ -39,8 +39,7 @@ def generate_mail():
     structured_model=model.with_structured_output(MailResponse)
     return structured_model.invoke(user_query)
 
-@tool("sending_mail",description="Sending mail to give mail_id")
-def sendMail(mail_id:str)->str:
+def send_email(mail_id:str,body,subject):
     try:
         sender=os.getenv("EMAIL_SENDER")
         receiver=mail_id
@@ -48,8 +47,8 @@ def sendMail(mail_id:str)->str:
         if not sender or not password:
             return "Email Credentials not configured"
         my_mail=generate_mail()
-        msg=MIMEText(my_mail.body)
-        msg['Subject']=my_mail.subject
+        msg=MIMEText(body)
+        msg['Subject']=subject
         msg['From']=sender
         msg["To"]=receiver
         server=smtplib.SMTP("smtp.gmail.com",587)
@@ -64,12 +63,40 @@ def sendMail(mail_id:str)->str:
     except Exception as e:
         return "Unknown error while sending mail"
 
+
+@tool("sending_mail",description="Sending mail to give mail_id")
+def sendMail(mail_id:str)->str:
+    my_mail=generate_mail()
+    return send_email(mail_id,my_mail.body,my_mail.subject)
+    # try:
+    #     sender=os.getenv("EMAIL_SENDER")
+    #     receiver=mail_id
+    #     password =os.getenv("EMAIL_PASSWORD")
+    #     if not sender or not password:
+    #         return "Email Credentials not configured"
+    #     my_mail=generate_mail()
+    #     msg=MIMEText(my_mail.body)
+    #     msg['Subject']=my_mail.subject
+    #     msg['From']=sender
+    #     msg["To"]=receiver
+    #     server=smtplib.SMTP("smtp.gmail.com",587)
+    #     server.starttls()
+    #     server.login(sender,password)
+    #     server.sendmail(sender,receiver,msg.as_string())
+    #     server.quit()
+    #     return "Email send Successfully"
+    # except smtplib.SMTPException as e:
+    #     return "SMTP error while sending mail"
+    
+    # except Exception as e:
+    #     return "Unknown error while sending mail"
+
 def generate_mail_template():
     structured_model=model.with_structured_output(MailResponse)
     return structured_model.invoke(f"""Write a email template for this intent
         Rules:
-            1. User {{name}} as placeholder for name
-            2.Do not personalize beyond {{name}}
+            1. User $name$ as placeholder for name
+            2.Do not personalize beyond $name$
             Intent:{user_query}
 """
     )
@@ -86,14 +113,16 @@ def send_mail_to_all(intent):
         name=user['name']
         receiver=user['email']
         mail_subject=template.subject
-        mail_body= template.body.replace("{{name}}", name)
+        print(f"Before {template.body}")
+        mail_body= template.body.replace("$name$", name)
+        print(mail_body)
         sender=os.getenv("EMAIL_SENDER")
         password =os.getenv("EMAIL_PASSWORD")
         if not sender or not password:
             return "Sender Credentials not configured"
         my_mail=generate_mail()
         msg=MIMEText(mail_body)
-        msg['Subject']=mail_body
+        msg['Subject']=mail_subject
         msg['From']=sender
         msg["To"]=receiver
         server=smtplib.SMTP("smtp.gmail.com",587)
@@ -101,7 +130,7 @@ def send_mail_to_all(intent):
         server.login(sender,password)
         server.sendmail(sender,receiver,msg.as_string())
         server.quit()
-        return "Email send Successfully"
+    return "Email send Successfully"
     
 
 llm_with_tools=model.bind_tools([getMail,sendMail,send_mail_to_all])
@@ -126,7 +155,7 @@ for tool_call in test_result.tool_calls:
             )
         )
     elif tool_call['name']=='Mail_to_all':
-        status=send_mail_to_all.invoke(user_query)
+        status=send_mail_to_all.invoke(tool_call['args'])
 
         messages.append(
             ToolMessage(
