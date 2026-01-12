@@ -56,6 +56,7 @@ def send_email(mail_id:str,body,subject):
         server.login(sender,password)
         server.sendmail(sender,receiver,msg.as_string())
         server.quit()
+        print(f"Email sent to {mail_id}")
         return "Email send Successfully"
     except smtplib.SMTPException as e:
         return "SMTP error while sending mail"
@@ -68,28 +69,6 @@ def send_email(mail_id:str,body,subject):
 def sendMail(mail_id:str)->str:
     my_mail=generate_mail()
     return send_email(mail_id,my_mail.body,my_mail.subject)
-    # try:
-    #     sender=os.getenv("EMAIL_SENDER")
-    #     receiver=mail_id
-    #     password =os.getenv("EMAIL_PASSWORD")
-    #     if not sender or not password:
-    #         return "Email Credentials not configured"
-    #     my_mail=generate_mail()
-    #     msg=MIMEText(my_mail.body)
-    #     msg['Subject']=my_mail.subject
-    #     msg['From']=sender
-    #     msg["To"]=receiver
-    #     server=smtplib.SMTP("smtp.gmail.com",587)
-    #     server.starttls()
-    #     server.login(sender,password)
-    #     server.sendmail(sender,receiver,msg.as_string())
-    #     server.quit()
-    #     return "Email send Successfully"
-    # except smtplib.SMTPException as e:
-    #     return "SMTP error while sending mail"
-    
-    # except Exception as e:
-    #     return "Unknown error while sending mail"
 
 def generate_mail_template():
     structured_model=model.with_structured_output(MailResponse)
@@ -106,36 +85,22 @@ def generate_mail_template():
 def send_mail_to_all(intent):
     template=generate_mail_template()
 
+    mail_subject=template.subject
+
     with open('db.json','r') as f:
         data=json.load(f)
     
     for user in data:
         name=user['name']
-        receiver=user['email']
-        mail_subject=template.subject
-        print(f"Before {template.body}")
+        mail_id=user['email']
         mail_body= template.body.replace("$name$", name)
-        print(mail_body)
-        sender=os.getenv("EMAIL_SENDER")
-        password =os.getenv("EMAIL_PASSWORD")
-        if not sender or not password:
-            return "Sender Credentials not configured"
-        my_mail=generate_mail()
-        msg=MIMEText(mail_body)
-        msg['Subject']=mail_subject
-        msg['From']=sender
-        msg["To"]=receiver
-        server=smtplib.SMTP("smtp.gmail.com",587)
-        server.starttls()
-        server.login(sender,password)
-        server.sendmail(sender,receiver,msg.as_string())
-        server.quit()
+        send_email(mail_id,mail_body,mail_subject)
     return "Email send Successfully"
     
 
 llm_with_tools=model.bind_tools([getMail,sendMail,send_mail_to_all])
 
-user_query=input("Write you query here")
+user_query=input(" What can i do for you")
 
 messages=[HumanMessage(user_query)]
 
