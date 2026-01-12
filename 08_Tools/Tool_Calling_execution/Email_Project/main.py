@@ -90,7 +90,7 @@ def send_mail_to_all(intent):
         sender=os.getenv("EMAIL_SENDER")
         password =os.getenv("EMAIL_PASSWORD")
         if not sender or not password:
-            return "Email Credentials not configured"
+            return "Sender Credentials not configured"
         my_mail=generate_mail()
         msg=MIMEText(mail_body)
         msg['Subject']=mail_body
