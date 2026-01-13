@@ -147,7 +147,7 @@ for tool_call in result.tool_calls:
 
 
 result=llm_with_tools.invoke(messages)
-print(result)
+print(result.content)
 
 # mail=getMail.invoke(test_result.tool_calls[0])
 # print(mail)

@@ -19,6 +19,7 @@ class Document(models.Model):
     )
     name=models.CharField(max_length=255)
     file = models.FileField(upload_to="pdfs/",null=True,blank=True) 
+    summary=models.TextField(blank=True,null=True)
     created_at=models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -35,7 +36,10 @@ class YoutubeVideo(models.Model):
     name=models.CharField(max_length=200)
     url=models.URLField(max_length=300)
     video_id=models.CharField(max_length=20)
+    summary=models.TextField(blank=True,null=True)
     created_at=models.DateTimeField(auto_now_add=True,blank=True,null=True)
+    def __str__(self):
+        return f"{self.name} ({self.user})_{self.id}"
 
 
     

@@ -14,7 +14,9 @@ urlpatterns=[
     path('ask/',AskQuestionView.as_view(),name="ask"),
     path('get-users/',GetUsersView.as_view(),name="list-user"),
     path('document/delete/<uuid:pk>/',DestroyDocumentView.as_view(),name="nothing"),
-    path('upload/youtube/url/',YoutubeUploadView.as_view(),name="youtube_url")
+    path('upload/youtube/url/',YoutubeUploadView.as_view(),name="youtube_url"),
+    path('delete/youtube/url/<uuid:pk>/',YoutubeDelete.as_view(),name="Delete_Youtube_Video"),
+    path('summarize/<uuid:pk>/',GenerateSummary.as_view(),name="Sumarize")
 ]
 
 if settings.DEBUG:

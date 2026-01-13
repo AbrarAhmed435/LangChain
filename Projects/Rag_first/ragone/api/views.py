@@ -13,25 +13,14 @@ from langchain_community.document_loaders import YoutubeLoader
 from langchain_community.document_loaders.youtube import TranscriptFormat
 from dotenv import load_dotenv
 from urllib.parse import urlparse, parse_qs
+from django.shortcuts import get_object_or_404
 from api.serializers import *
 
 load_dotenv()
 
 model=ChatOpenAI(model='gpt-4o-mini')
 
-
-# class RegisterView(APIView):
-#     permission_classes=[permissions.AllowAny]
-#     def post(self,request):
-#         serializer=RegisterSerializer(data=request.data)
-#         serializer.is_valid(raise_exception=True)
-#         user=serializer.save()
-#         return Response({
-#             "message":"User Registered Successfully",
-#             "user_id":user.id,
-#             "user_name":user.username
-#         },status=status.HTTP_201_CREATED)
-    
+ 
 class RegisterView(generics.CreateAPIView):
     serializer_class=RegisterSerializer
 
@@ -95,10 +84,12 @@ class DocumentUploadView(APIView):
         # print(len(chunks))
         # print(chunks[-1].page_content)
 
-        for chunk in chunks:
+        for idx,chunk in enumerate(chunks):
             chunk.metadata.update({
                 "user_id":request.user.id,
-                "document_id":str(document.id)
+                "document_id":str(document.id),
+                "chunk_index":idx,
+                "source":"pdf"
             })
 
         vector_store.add_documents(chunks)
@@ -154,10 +145,19 @@ class YoutubeUploadView(generics.ListCreateAPIView):
 
     def perform_create(self,serializer):
         youtube_url=serializer.validated_data['url']
+        video_name=serializer.validated_data['name'
+                                             ]
         video_id=self.extract_video_id(youtube_url)
-
         if not video_id:
             raise serializers.ValidationError("Invalid Youtube URL")
+        #Check is video exists in db for user
+        user_video=YoutubeVideo.objects.filter(user=self.request.user,video_id=video_id)
+        if user_video.exists():
+            raise serializers.ValidationError({
+                "error":"Video already present in database"
+            })
+
+        
         
         video=serializer.save(
             user=self.request.user,
@@ -176,14 +176,36 @@ class YoutubeUploadView(generics.ListCreateAPIView):
         except Exception as e:
             video.delete()
             raise serializers.ValidationError("Could not fetch Youtube transcript")
-        for doc in docs:
+        for idx,doc in enumerate(docs):
             doc.metadata.update({
+                "video_name":video_name,
                 "user_id":self.request.user.id,
                 "source":"youtube",
                 "document_id":str(video.id),
                 "video_id":video_id,
+                "chunk_index":idx,
             })
         vector_store.add_documents(docs)
+class YoutubeDelete(generics.DestroyAPIView):
+    permission_classes=[permissions.IsAuthenticated]
+    serializer_class=YoutubeUploadSerializer
+
+    def get_queryset(self):
+        return YoutubeVideo.objects.filter(user=self.request.user)
+    
+    def perform_destroy(self, instance):
+        #deleting in chroma
+        vector_store.delete(
+            where={
+                # "user_id":self.request.user.id,
+                "document_id":str(instance.id),
+            }
+        )
+
+        # for deleting in django db
+        instance.delete() # for deleting in django db
+
+
     
 
 class AskQuestionView(APIView):
@@ -229,6 +251,91 @@ class AskQuestionView(APIView):
             "results":response_data,
             "llm_answer":llm_answer
         },status=status.HTTP_200_OK)
+
+class GenerateSummary(APIView):
+    permission_classes=[permissions.IsAuthenticated]
+
+    MODEL_MAP={
+        "pdf":Document,
+        "youtube":YoutubeVideo
+    }
+
+    def generate_summary(self,docs):
+        temp=docs
+        temp_sum=""
+        for i in range(len(temp)-1):
+            temp_sum=model.invoke(f"Summarize foollowing content in 100 -150(if text is larger if text is smaller you can generate shorter as well) words Start summarize directly without saying \"this is summarization\" of text or any other heading \n Content:{temp_sum+temp[i]+temp[i+1]}").content
+            print(temp_sum)
+        if len(temp)==1:
+            temp_sum=model.invoke(f"Summarize foollowing content in 100 -150(if text is larger if text is smaller you can generate shorter as well) words Start summarize directly without saying \"this is summarization\" of text or any other heading \n Content:{temp_sum+temp[0]}").content
+        
+        return temp_sum
+
+        
+
+
+    def get(self,request,pk):
+        # print(pk)
+        mydocs = vector_store.get(
+            where={
+                "$and": [
+                    {"document_id": str(pk)},
+                    {"user_id": request.user.id}
+                ]
+            },
+            include=["documents", "metadatas"]
+        )
+        docs = mydocs["documents"]
+        metas = mydocs["metadatas"]
+        if not metas:
+            return Response({
+                "detail":"No Content found",
+            },status=status.HTTP_404_NOT_FOUND)
+        
+        ordered_docs = [
+            doc for doc, meta in sorted(
+                zip(docs, metas),
+                key=lambda pair: pair[1]["chunk_index"]
+            )
+        ]
+        if not ordered_docs:
+            return Response({
+                "detail":"No content available",
+            },status=status.HTTP_404_NOT_FOUND)
+        # print(ordered_docs)
+
+        source=metas[0].get("source")
+        Model=self.MODEL_MAP.get(source)
+        if not Model:
+            return Response({
+                "detail":"Invalid Content Type",
+            },status=status.HTTP_400_BAD_REQUEST)
+
+
+        #db instance
+        # from django.shortcuts import get_object_or_404
+        instance=get_object_or_404(Model,id=pk,user=request.user)
+        if instance.summary:
+            summary=instance.summary
+        else:    
+            summary=self.generate_summary(ordered_docs)
+            instance.summary=summary
+            instance.save(update_fields=['summary'])
+
+        # print(f"Summary :\n{summary}")
+
+        
+
+        return Response({
+            "detail":"Hello",
+
+        },status=status.HTTP_200_OK)
+
+
+
+
+
+
 
 
 

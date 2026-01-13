@@ -5,6 +5,7 @@ from .models import *
 
 admin.site.register(Document)
 admin.site.register(DocumentChunk)
+admin.site.register(YoutubeVideo)
 
 
 @admin.register(CustomUser)
