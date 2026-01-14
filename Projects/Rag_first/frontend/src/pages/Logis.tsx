@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { loginApi } from "../api/auth.api";
+import "./Login.css";
 
 import { toast, ToastContainer } from "react-toastify";
 
@@ -16,7 +17,7 @@ const handleLogin=async (e:React.FormEvent<HTMLFormElement>)=>{
             password,
         });
 
-        localStorage.setItem("accesss",res.access);
+        localStorage.setItem("access",res.access);
         localStorage.setItem("refresh",res.refresh);
         toast.success("You are logged in")
         console.log("Logged in Successfully")
@@ -26,26 +27,34 @@ const handleLogin=async (e:React.FormEvent<HTMLFormElement>)=>{
     }
 
 };
+return (
+  <div className="login-container">
+    <ToastContainer />
 
-    return (
-        <div>
-             <ToastContainer />
-            <h2>Login</h2>
-            <form onSubmit={handleLogin}>
-            <input type="email" 
-            placeholder="Email"
-            value={email}
-            onChange={(e)=>setEmail(e.target.value)}
-            />
-            <input type="password" 
-            placeholder="Password"
-            value={password}
-            onChange={(e)=>setPassword(e.target.value)}
-            />
-            <button>Login</button>
-            </form>
-        </div>
-    )
+    <div className="login-card">
+      <h2>Login</h2>
+
+      <form onSubmit={handleLogin}>
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+
+        <button>Login</button>
+      </form>
+    </div>
+  </div>
+);
+
 }
 
 export default Login

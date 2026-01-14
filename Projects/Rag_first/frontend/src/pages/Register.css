@@ -1,0 +1,85 @@
+/* Page background */
+.register-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0f172a; /* deep blue-black */
+}
+
+/* Card */
+.register-card {
+  width: 100%;
+  max-width: 420px;
+  background: #020617; /* darker blue */
+  padding: 2.2rem;
+  border-radius: 10px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  border: 1px solid #1e293b;
+}
+
+/* Heading */
+.register-card h2 {
+  text-align: center;
+  margin-bottom: 1.6rem;
+  color: #e2e8f0;
+  font-weight: 600;
+}
+
+/* Form */
+.register-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+/* Inputs */
+.register-card input {
+  padding: 0.8rem 0.9rem;
+  font-size: 0.95rem;
+  background: #020617;
+  border: 1px solid #334155;
+  border-radius: 6px;
+  color: #e5e7eb;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.register-card input::placeholder {
+  color: #94a3b8;
+}
+
+.register-card input:focus {
+  border-color: #38bdf8; /* blue highlight */
+  box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.4);
+}
+
+/* Button */
+.register-card button {
+  margin-top: 0.6rem;
+  padding: 0.8rem;
+  font-size: 1rem;
+  font-weight: 500;
+  background: #2563eb; /* strong blue */
+  color: #f8fafc;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.register-card button:hover {
+  background: #1d4ed8;
+}
+
+.register-card button:active {
+  transform: scale(0.98);
+}
+
+/* Toast */
+.Toastify__toast {
+  background: #020617;
+  color: #e5e7eb;
+  border: 1px solid #1e293b;
+  font-size: 0.9rem;
+}

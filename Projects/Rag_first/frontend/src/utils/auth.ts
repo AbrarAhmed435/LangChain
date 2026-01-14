@@ -1,4 +1,6 @@
 export const isAuthenticated = (): boolean => {
-  const token = localStorage.getItem("access");
-  return Boolean(token);
+  return Boolean(
+    localStorage.getItem("access") ||
+    localStorage.getItem("refresh")
+  );
 };

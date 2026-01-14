@@ -2,6 +2,8 @@ import { registerApi } from "../api/auth.api"
 import { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import "./Register.css";
+
 
 const Register=()=>{
     const [email,setEmail]=useState<string>("")
@@ -21,9 +23,7 @@ const handleRegister=async(e:React.FormEvent<HTMLFormElement>)=>{
         toast.success("Register successful! Redirecting to Login Page....", {
           onClose: () => navigate("/login"), // Navigate only after toast closes
         });
-        // toast.success("Register Successfully")
-        // navigate('/login')
-        // console.log("Register Successfull")
+        
 
 
     }catch(error){
@@ -31,30 +31,39 @@ const handleRegister=async(e:React.FormEvent<HTMLFormElement>)=>{
 
     }
 }
-    
     return (
-        <div>
-            <ToastContainer />
-            <h2>Register</h2>
-            <form onSubmit={handleRegister}>
-                <input type="email" 
-                placeholder="Email"
-                onChange={(e)=>setEmail(e.target.value)}
-                />
-                <input type="password" 
-                placeholder="Password"
-                value={password}
-                onChange={(e)=>setPassword(e.target.value)}
-                />
-                <input type="password" 
-                placeholder="Confirm password"
-                value={password2}
-                onChange={(e)=>setPassword2(e.target.value)}
-                />
-                <button>Register</button>
-            </form>
-        </div>
-    )
+  <div className="register-container">
+    <ToastContainer />
+    <div className="register-card">
+      <h2>Register</h2>
+
+      <form onSubmit={handleRegister}>
+        <input
+          type="email"
+          placeholder="Email"
+          onChange={(e) => setEmail(e.target.value)}
+        />
+
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+
+        <input
+          type="password"
+          placeholder="Confirm password"
+          value={password2}
+          onChange={(e) => setPassword2(e.target.value)}
+        />
+
+        <button>Register</button>
+      </form>
+    </div>
+  </div>
+);
+
 }
 
 export default Register;
