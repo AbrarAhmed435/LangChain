@@ -264,10 +264,10 @@ class GenerateSummary(APIView):
         temp=docs
         temp_sum=""
         for i in range(len(temp)-1):
-            temp_sum=model.invoke(f"Summarize foollowing content in 100 -150(if text is larger if text is smaller you can generate shorter as well) words Start summarize directly without saying \"this is summarization\" of text or any other heading \n Content:{temp_sum+temp[i]+temp[i+1]}").content
+            temp_sum=model.invoke(f"Summarize foollowing content in  150-200(if text is larger if text is smaller you can generate shorter as well) words Start summarize directly without saying \"this is summarization\" of text or any other heading \n Content:{temp_sum+temp[i]+temp[i+1]}").content
             print(temp_sum)
         if len(temp)==1:
-            temp_sum=model.invoke(f"Summarize foollowing content in 100 -150(if text is larger if text is smaller you can generate shorter as well) words Start summarize directly without saying \"this is summarization\" of text or any other heading \n Content:{temp_sum+temp[0]}").content
+            temp_sum=model.invoke(f"Summarize foollowing content in 100 -150(if text is smaller you can generate shorter as well) words Start summarize directly without saying \"this is summarization\" of text or any other heading \n Content:{temp_sum+temp[0]}").content
         
         return temp_sum
 
@@ -327,20 +327,6 @@ class GenerateSummary(APIView):
         
 
         return Response({
-            "detail":"Hello",
+            "summary":summary,
 
         },status=status.HTTP_200_OK)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
