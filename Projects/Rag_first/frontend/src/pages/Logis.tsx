@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { loginApi } from "../api/auth.api";
 import "./Login.css";
+import { useNavigate } from "react-router-dom";
 
 import { toast, ToastContainer } from "react-toastify";
 
 const Login=()=>{
     const [email,setEmail]=useState<string>("")
     const [password,setPassword]=useState<string>("")
+    const navigate=useNavigate()
 
 const handleLogin=async (e:React.FormEvent<HTMLFormElement>)=>{
     e.preventDefault()
@@ -19,9 +21,9 @@ const handleLogin=async (e:React.FormEvent<HTMLFormElement>)=>{
 
         localStorage.setItem("access",res.access);
         localStorage.setItem("refresh",res.refresh);
-        toast.success("You are logged in")
-        console.log("Logged in Successfully")
-
+        toast.success("You'r Loged in Redirecting to Home page...", {
+          onClose: () => navigate("/home"), // Navigate only after toast closes
+        });
     }catch(error){
         console.log("Login Failed",error)
     }
