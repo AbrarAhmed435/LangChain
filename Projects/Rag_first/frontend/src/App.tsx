@@ -7,6 +7,8 @@ import { toast,ToastContainer } from 'react-toastify'
 import Login from './pages/Logis'
 import ProtectedRoute from './routes/ProtectedRoute'
 import Home from './pages/Home'
+import Users from './pages/Users'
+import './index.css'
 
 
 function App() {
@@ -21,6 +23,7 @@ function App() {
       <Route path='/login' element={<Login/>}/>
       <Route element={<ProtectedRoute/>}>
       <Route path="/home" element={<Home/>}/>
+      <Route path='/admin-panel' element={<Users/>} />
       </Route>
     </Routes>
 

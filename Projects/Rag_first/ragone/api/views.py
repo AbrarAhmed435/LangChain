@@ -26,7 +26,7 @@ class RegisterView(generics.CreateAPIView):
 
 
 class GetUsersView(generics.ListAPIView):
-    permission_classes=[permissions.AllowAny]
+    permission_classes=[permissions.IsAdminUser]
     queryset=CustomUser.objects.all()
     serializer_class=UserSerializer
 
@@ -211,7 +211,7 @@ class YoutubeDelete(generics.DestroyAPIView):
 class AskQuestionView(APIView):
     permission_classes=[permissions.IsAuthenticated]
 
-    def post(self,request):
+    def post(self,request,pk):
         serializer=QuestionSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
@@ -228,9 +228,19 @@ class AskQuestionView(APIView):
         results=vector_store.similarity_search_with_score(
             query=question,
             k=4,
+            # where={
+            #     "$and":[
+            #         {"user_id":request.user.id},
+            #         {"document_id":str(pk)}
+            #     ]
+            # }
             filter={
-                "user_id":request.user.id
+                "$and":[
+                    {"user_id": request.user.id,},
+                    {"document_id": str(pk)}
+                ]
             }
+
         )
 
         response_data=[]
