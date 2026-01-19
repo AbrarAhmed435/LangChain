@@ -101,6 +101,15 @@ class DocumentUploadView(APIView):
             "name":document.name,
             "message":"pdf uploaded successfully"
         },status=status.HTTP_201_CREATED)
+    
+    def get(self, request):
+        documents = Document.objects.filter(user=request.user) #queryset
+        serializer = DocumentUploadSerializer(documents, many=True)
+        return Response({
+            "documents":serializer.data
+        },status=status.HTTP_200_OK)
+        # return Response(serializer.data, status=status.HTTP_200_OK)
+
 
 
 class DestroyDocumentView(generics.DestroyAPIView):
@@ -203,7 +212,7 @@ class YoutubeDelete(generics.DestroyAPIView):
         )
 
         # for deleting in django db
-        instance.delete() # for deleting in django db
+        instance.delete()
 
 
     

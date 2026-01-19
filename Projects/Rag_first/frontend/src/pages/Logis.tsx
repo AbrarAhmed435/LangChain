@@ -56,6 +56,7 @@ return (
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          required
         />
 
         <input
@@ -63,6 +64,7 @@ return (
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          required
         />
 
         <button disabled={loading}>{loading? "Logging in ":"Login"}</button>

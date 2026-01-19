@@ -1,0 +1,48 @@
+# LangChain Core
+langchain
+langchain-core
+
+# OpenAI Integration
+langchain-openai
+openai
+
+# Anthropic Integration
+langchain-anthropic
+
+# Google Gemini (PaLM) Integration
+langchain-google-genai
+google-genai
+
+# Hugging Face Integration
+langchain-huggingface
+transformers
+huggingface-hub
+
+# Environment Variable Management
+python-dotenv
+
+# Machine Learning Utilities
+numpy
+scikit-learn
+
+sentence-transformers
+langchain_community
+PyPDF2
+sentence-transformers
+streamlit
+pymupdf
+unstructured
+grandalf
+
+django
+django_rest_framework
+django_rest_framework_jwt
+django_extensions
+wikipedia
+wikipedia-api
+youtube-transcript-api
+pytube
+duckduckgo-search
+langchain_experimental
+langchain-google-community
+psycopg2-binary

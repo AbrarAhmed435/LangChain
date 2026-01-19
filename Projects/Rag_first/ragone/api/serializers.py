@@ -56,6 +56,13 @@ class DocumentUploadSerializer(serializers.ModelSerializer):
         model=Document
         fields=["id","name","file"]
         read_only_fields=["id"]
+        # write_only_fields=["file"]
+        extra_kwargs={
+            'file':{
+                'write_only':True
+            }
+        }
+
    # DRF automatically calls validation methods during serializer.is_valid()(this line is in views):
 # 1. For each field, if validate_<fieldname>() exists → it is called
 #    e.g. validate_name(), validate_file()
@@ -89,11 +96,11 @@ class YoutubeUploadSerializer(serializers.ModelSerializer):
         fields=['id','name','url']
         read_only_fields=['id']
         # write_only_fields=['url']
-        extra_kwargs={
-            'url':{
-                'write_only':True
-            }
-        }
+        # extra_kwargs={
+        #     'url':{
+        #         'write_only':True
+        #     }
+        # }
     def validate_url(self,value):
         if "youtube.com" not in value and "youtu.be" not in value:
             raise serializers.ValidationError("Invalid Youtube URL")

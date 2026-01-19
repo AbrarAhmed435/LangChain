@@ -42,6 +42,7 @@ const handleRegister=async(e:React.FormEvent<HTMLFormElement>)=>{
           type="email"
           placeholder="Email"
           onChange={(e) => setEmail(e.target.value)}
+          required
         />
 
         <input
@@ -49,6 +50,7 @@ const handleRegister=async(e:React.FormEvent<HTMLFormElement>)=>{
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          required
         />
 
         <input
@@ -56,6 +58,7 @@ const handleRegister=async(e:React.FormEvent<HTMLFormElement>)=>{
           placeholder="Confirm password"
           value={password2}
           onChange={(e) => setPassword2(e.target.value)}
+          required
         />
 
         <button>Register</button>

@@ -1,55 +1,67 @@
 import { useEffect, useState } from "react";
-import api from "../api/axios";
+import { useNavigate } from "react-router-dom";
 import "./home.css";
+import { Link } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+
+const messages = [
+  "😎Search less, Understand More",
+  "📄 Chat with your documents in natural language.",
+  "🔍 Retrieve the most relevant context instantly.",
+  "🧠 Generate grounded answers, not hallucinations.",
+  "⚡ Ask complex questions and get precise results.",
+  "📚 Turn unstructured data into useful knowledge.",
+  "🤖 Powered by Retrieval-Augmented Generation.",
+];
+
+
 
 const Home = () => {
-  const [loading, setLoading] = useState(true);
-  const [ready, setReady] = useState(false);
+  const [text, setText] = useState("");
+  const [index, setIndex] = useState(0);
+  const [charIndex, setCharIndex] = useState(0);
+  const navigate = useNavigate();
 
+  // Typewriter effect
   useEffect(() => {
-    const bootstrap = async () => {
-      try {
-        // any protected endpoint works
-        await api.get("/get-users/");
-        setReady(true);
-      } finally {
-        setLoading(false);
-      }
-    };
+    const current = messages[index];
 
-    bootstrap();
-  }, []);
-
-  if (loading) {
-    return <p className="loading">Loading your workspace…</p>;
-  }
+    if (charIndex < current.length) {
+      const timeout = setTimeout(() => {
+        setText((prev) => prev + current[charIndex]);
+        setCharIndex(charIndex + 1);
+      }, 80);
+      return () => clearTimeout(timeout);
+    } else {
+      const timeout = setTimeout(() => {
+        setText("");
+        setCharIndex(0);
+        setIndex((index + 1) % messages.length);
+      }, 1500);
+      return () => clearTimeout(timeout);
+    }
+  }, [charIndex, index]);
 
   return (
     <div className="home">
-      <header className="home-header">
-        <h2>RAG Workspace</h2>
-        <button className="logout-btn">Logout</button>
-      </header>
+      <h1>Welcome 👋</h1>
 
-      <section className="upload-section">
-        <h3>Upload Sources</h3>
-        <button disabled={!ready}>Upload PDF</button>
-        <button disabled={!ready}>Add YouTube URL</button>
-      </section>
+      <h2 className="typewriter">
+        {text}
+        <span className="cursor">|</span>
+      </h2>
 
-      <section className="documents">
-        <h3>Your Documents</h3>
-        <p>No documents uploaded yet.</p>
-      </section>
+      <p className="home-intro">
+        A simple platform to explore features, understand the flow,
+        and get started quickly.
+      </p>
 
-      <section className="chat">
-        <h3>Ask a Question</h3>
-        <input
-          placeholder="Ask something about your documents..."
-          disabled={!ready}
-        />
-        <button disabled={!ready}>Ask</button>
-      </section>
+      <button
+        className="primary-btn"
+        onClick={() => navigate("/dashboard")}
+      >
+        Get Started →
+      </button>
     </div>
   );
 };
