@@ -20,7 +20,8 @@ load_dotenv()
 
 model=ChatOpenAI(model='gpt-4o-mini')
 
- 
+
+
 class RegisterView(generics.CreateAPIView):
     serializer_class=RegisterSerializer
 

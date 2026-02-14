@@ -12,8 +12,19 @@ import os
 
 load_dotenv()
 
-model=ChatOpenAI(model='gpt-4o-mini')
-# model=ChatGoogleGenerativeAI(model="gemini-2.5-flash")
+# model=ChatOpenAI(model='gpt-4o-mini')
+model=ChatGoogleGenerativeAI(model="gemini-2.5-flash")
+from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
+llm=HuggingFaceEndpoint(
+    # repo_id="HuggingFaceH4/zephyr-7b-beta",
+    # repo_id="mistralai/Mistral-7B-Instruct-v0.2",
+    # repo_id="HuggingFaceH4/zephyr-7b-gemma-v0.1",
+    # repo_id="openai/gpt-oss-20b",
+    repo_id="openai/gpt-oss-120b",
+    # repo_id="Qwen/Qwen3-4B-Instruct-2507",
+    task="text-generation"
+)
+# model=ChatHuggingFace(llm=llm)
 
 class MailResponse(BaseModel):
     subject:Annotated[str,Field(max_length=100,description="This is the subject of Mail")]
@@ -82,7 +93,7 @@ def generate_mail_template():
     
 
 @tool("Mail_to_all",description="This tool sends mail to all users that are in database ")
-def send_mail_to_all(intent):
+def send_mail_to_all(intent:str)->str:
     template=generate_mail_template()
 
     mail_subject=template.subject
@@ -106,7 +117,8 @@ messages=[HumanMessage(user_query)]
 
 test_result=llm_with_tools.invoke(messages)
 
-print(test_result.tool_calls[0])
+# print(test_result.tool_calls[0])
+# print(test_result)
 messages.append(test_result)
 
 for tool_call in test_result.tool_calls:
