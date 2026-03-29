@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState ,useEffect} from "react";
 import api from "../api/axios";
 import { toast, ToastContainer } from "react-toastify";
 import './Dashboard.css'
@@ -21,11 +21,71 @@ interface Youtube{
 
 
 export default function Dashboard(){
-
-    const [pdfs,setPdfs]=useState<PdfDocument[]>([])
+  const [pdfs,setPdfs]=useState<PdfDocument[]>([])
     const [urls,setUrls]=useState<Youtube[]>([])
+    
+    const [pdfFile, setPdfFile] = useState<File | null>(null)
+const [pdfName, setPdfName] = useState("")
+const [youtubeName, setYoutubeName] = useState("")
+const [youtubeUrl, setYoutubeUrl] = useState("")
+
+useEffect(()=>{
+  fetchPdfs()
+  fetchUrls()
+},[])
+
+    
 
     const navigate=useNavigate()
+    const uploadPdf = async () => {
+  if (!pdfFile || !pdfName) {
+    toast.error("Enter name and select file")
+    return
+  }
+
+  const formData = new FormData()
+  formData.append("file", pdfFile)
+  formData.append("name", pdfName)
+
+  try {
+    const res = await api.post("/upload-pdf/", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    })
+
+    if (res.status === 201) {
+      toast.success("PDF Uploaded 📄")
+      setPdfFile(null)
+      setPdfName("")
+      fetchPdfs()
+    }
+  } catch (error) {
+    toast.error("Upload failed")
+  }
+}
+const uploadYoutube = async () => {
+  if (!youtubeName || !youtubeUrl) {
+    toast.error("Enter name and url")
+    return
+  }
+
+  try {
+    const res = await api.post("/upload/youtube/url/", {
+      name: youtubeName,
+      url: youtubeUrl,
+    })
+
+    if (res.status === 201) {
+      toast.success("Youtube URL Added 🔗")
+      setYoutubeName("")
+      setYoutubeUrl("")
+      fetchUrls()
+    }
+  } catch (error) {
+    toast.error("Upload failed")
+  }
+}
 
     const fetchPdfs= async ()=>{
         console.log("Button Pressed")
@@ -34,9 +94,10 @@ export default function Dashboard(){
             console.log(res)
             setPdfs(res.data.documents)
         }catch(error){
-            toast.error("Somehing went wron")
+            toast.error("Somehing went wrong")
         }
     }
+    
     const fetchUrls=async ()=>{
     try{
         const res=await api.get('/upload/youtube/url/')
@@ -92,6 +153,26 @@ export default function Dashboard(){
 />
     <div className="dashboard-card">
       <h1>Documents</h1>
+      <div className="upload-section">
+
+  <input
+    type="text"
+    placeholder="Document Name"
+    value={pdfName}
+    onChange={(e) => setPdfName(e.target.value)}
+  />
+
+  <input
+    type="file"
+    accept="application/pdf"
+    onChange={(e) => setPdfFile(e.target.files?.[0] || null)}
+  />
+
+  <button onClick={uploadPdf}>
+    Upload PDF
+  </button>
+
+</div>
 
       <button onClick={fetchPdfs} className="loadbutton">Load Documents</button>
 
@@ -110,6 +191,27 @@ export default function Dashboard(){
     </div>
     <div className="dashboard-card">
       <h1>Youtube Urls</h1>
+      <div className="upload-section">
+
+  <input
+    type="text"
+    placeholder="Video Name"
+    value={youtubeName}
+    onChange={(e) => setYoutubeName(e.target.value)}
+  />
+
+  <input
+    type="text"
+    placeholder="Youtube URL"
+    value={youtubeUrl}
+    onChange={(e) => setYoutubeUrl(e.target.value)}
+  />
+
+  <button onClick={uploadYoutube}>
+    Upload URL
+  </button>
+
+</div>
 
       <button onClick={fetchUrls} className="loadbutton">Load Url's</button>
 

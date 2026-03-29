@@ -8,12 +8,17 @@ import json
 import smtplib
 from email.mime.text import MIMEText
 from pydantic import BaseModel, Field
+from langchain_community.tools import DuckDuckGoSearchRun
+
+search_tool=DuckDuckGoSearchRun()
+
+
 import os
 
 load_dotenv()
 
 # model=ChatOpenAI(model='gpt-4o-mini')
-model=ChatGoogleGenerativeAI(model="gemini-2.5-flash")
+# model=ChatGoogleGenerativeAI(model="gemini-2.5-flash")
 from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
 llm=HuggingFaceEndpoint(
     # repo_id="HuggingFaceH4/zephyr-7b-beta",
@@ -25,10 +30,20 @@ llm=HuggingFaceEndpoint(
     task="text-generation"
 )
 # model=ChatHuggingFace(llm=llm)
+model=ChatGoogleGenerativeAI(model='gemini-2.5-flash')
 
 class MailResponse(BaseModel):
     subject:Annotated[str,Field(max_length=100,description="This is the subject of Mail")]
     body:Annotated[str,Field(max_length=500,description="This is body of mail")]
+
+
+@tool("search_on_web",description="Tools that uses web for searching")
+def search_on_web(query:str)->str:
+    results=search_tool.invoke('top news in india today')
+    return {
+        "response":result
+    }
+
 
 
 @tool("get_mail_id_from_db",description="Tool that fetches mail id of user from database")
@@ -106,10 +121,11 @@ def send_mail_to_all(intent:str)->str:
         mail_id=user['email']
         mail_body= template.body.replace("$name$", name)
         send_email(mail_id,mail_body,mail_subject)
+        print(f"mail send to {name}")
     return "Email send Successfully"
     
 
-llm_with_tools=model.bind_tools([getMail,sendMail,send_mail_to_all])
+llm_with_tools=model.bind_tools([getMail,sendMail,send_mail_to_all,search_on_web])
 
 user_query=input(" What can i do for you")
 
@@ -140,6 +156,14 @@ for tool_call in test_result.tool_calls:
                 tool_call_id=tool_call['id']
             )
         )
+    elif tool_call['name']=='search_on_web':
+        response=search_on_web.invoke(tool_call['args'])
+        messages.append(
+            ToolMessage(
+                content=response,
+                tool_call_id=tool_call['id']
+            )
+        )
 
         
 
@@ -159,7 +183,7 @@ for tool_call in result.tool_calls:
 
 
 result=llm_with_tools.invoke(messages)
-print(result.content)
+# print(result.content)
 
 # mail=getMail.invoke(test_result.tool_calls[0])
 # print(mail)

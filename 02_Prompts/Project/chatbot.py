@@ -1,5 +1,6 @@
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import HumanMessage,AIMessage
+from langchain_google_genai import ChatGoogleGenerativeAI
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -7,7 +8,8 @@ load_dotenv()
 from prompt import chat_template
 from memory import load_chat_history,trim_history
 
-model=ChatOpenAI(model='gpt-4o-mini',temperature=0.5)
+# model=ChatOpenAI(model='gpt-4o-mini',temperature=0.5)
+model=ChatGoogleGenerativeAI(model='gemini-2.5-flash')
 
 
 chat_history=load_chat_history("chat_history.txt")

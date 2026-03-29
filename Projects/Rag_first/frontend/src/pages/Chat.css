@@ -18,6 +18,30 @@
   gap: 10px;
   margin-bottom: 20px;
 }
+.summary-btn {
+  margin-bottom: 14px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: none;
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.summary-btn:hover {
+  opacity: 0.9;
+}
+
+.chat-summary {
+  margin-bottom: 18px;
+  padding: 16px;
+  border-radius: 10px;
+  background: #020617;
+  border: 1px solid #1e293b;
+  line-height: 1.6;
+  color: #cbd5f5;
+}
 
 .chat-form input {
   flex: 1;

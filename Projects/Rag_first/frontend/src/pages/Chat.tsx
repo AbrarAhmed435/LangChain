@@ -10,6 +10,8 @@ export default function Chat() {
   const [response, setResponse] = useState("");
   const [question, setQuestion] = useState("");
   const [loading, setLoading] = useState(false);
+  const [summary, setSummary] = useState("")
+const [loadingSummary, setLoadingSummary] = useState(false)
 
   const handleQuery = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -36,10 +38,34 @@ export default function Chat() {
       setLoading(false);
     }
   };
+  const handleSummary = async () => {
+  if (!id) return
+
+  try {
+    setLoadingSummary(true)
+
+    const res = await api.get(`/summarize/${id}/`)
+
+    if (res.status !== 200) {
+      toast.error("Failed to generate summary")
+      return
+    }
+
+    setSummary(res.data.summary || res.data)
+
+  } catch {
+    toast.error("Something went wrong")
+  } finally {
+    setLoadingSummary(false)
+  }
+}
 
   return (
     <div className="chat-page">
       <ToastContainer autoClose={1200} hideProgressBar />
+      <button className="summary-btn" onClick={handleSummary} disabled={loadingSummary}>
+  {loadingSummary ? "Generating Summary..." : "Generate Summary"}
+</button>
 
       <form onSubmit={handleQuery} className="chat-form">
         <input
@@ -53,6 +79,11 @@ export default function Chat() {
           {loading ? "Thinking..." : "Ask"}
         </button>
       </form>
+      {summary && (
+  <div className="chat-summary">
+    <ReactMarkdown>{summary}</ReactMarkdown>
+  </div>
+)}
 
       {response && (
         <div className="chat-response">

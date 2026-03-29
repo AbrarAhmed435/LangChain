@@ -1,9 +1,8 @@
-User: Hi, I want to request a refund for my online order.
-Chatbot: Sure! I can help with that. Could you please share your order ID?
-User: My order ID is ORD12345. The item arrived damaged.
-Chatbot: Thanks for the details. I’ve initiated a refund request for your order.User: My name is sapna
-Chatbot: Thank you, Sapna. I have noted your name along with your order ID (ORD12345). Since the item arrived damaged, I will process the refund for you. 
+User: Who am i
+Chatbot: As an AI customer support agent, I don't have access to your personal identity or information unless you choose to provide it within the context of our conversation. My purpose is to help you with questions about our online shopping platform.
 
-You should receive a confirmation email shortly, and the refund will be credited to your original payment method within a few business days. 
+So, tell me, **how can I assist you today regarding your shopping experience?** Are you looking for order details, product information, help with your account, or something else?
+User: my anme i s abrar
+Chatbot: Thank you for letting me know, Abrar! It's nice to meet you.
 
-Is there anything else I can assist you with?
+Now that I know your name, how can I help you today with your online shopping? What can I assist you with on our platform?

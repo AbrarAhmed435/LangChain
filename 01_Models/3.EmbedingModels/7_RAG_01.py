@@ -1,7 +1,8 @@
 
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from sklearn.metrics.pairwise import cosine_similarity
-from langchain_openai import ChatOpenAI
+# from langchain_openai import ChatOpenAI
+
 import numpy as np
 
 from dotenv import load_dotenv
@@ -11,6 +12,18 @@ load_dotenv()
 from PyPDF2 import PdfReader
 
 import re
+
+from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
+llm=HuggingFaceEndpoint(
+    # repo_id="HuggingFaceH4/zephyr-7b-beta",
+    # repo_id="mistralai/Mistral-7B-Instruct-v0.2",
+    # repo_id="HuggingFaceH4/zephyr-7b-gemma-v0.1",
+    repo_id="openai/gpt-oss-20b",
+    # repo_id="openai/gpt-oss-120b",
+    # repo_id="Qwen/Qwen3-4B-Instruct-2507",
+    task="text-generation"
+)
+model=ChatHuggingFace(llm=llm)
 
 def pdf_to_sentences(pdf_path):
     reader=PdfReader(pdf_path)
@@ -27,7 +40,7 @@ def pdf_to_sentences(pdf_path):
 
     return sentences
 
-SOURCE_PDF="/home/abrar/Desktop/Abrar/LangChain/Documents/the-theories-and-fatality-of-bermuda-triangle-52775.pdf"
+SOURCE_PDF="/home/abrar/Desktop/Abrar/LangChain/01_Models/3.EmbedingModels/X-PRIMS.pdf"
 
 document=pdf_to_sentences(SOURCE_PDF)
 print(len(document))
@@ -62,7 +75,7 @@ from langchain_huggingface import ChatHuggingFace,HuggingFacePipeline
 # zephyr=ChatHuggingFace(llm=llm2)
 
 
-model_2=ChatOpenAI(model='gpt-4o-mini',temperature=0.5)
+# model_2=ChatOpenAI(model='gpt-4o-mini',temperature=0.5)
 
 def generate_embeddings(document):
     if isinstance(document,list):
@@ -83,7 +96,7 @@ context:{answer}
 question:{question}
 Give Answer
 '''
-    result=model_2.invoke(prompt)
+    result=model.invoke(prompt)
     return result.content
 
 
@@ -91,7 +104,7 @@ doc_emb=generate_embeddings(document)
 
 
 
-question = ' what was on board  USS Cyclops (1918) a 542-foot-long Navy cargoship ,that  sank somewhere between Barbados and the Chesapeake Bay'
+question = 'Explain this part "6. Future Research Directions"'
 
 
 ques_emb=generate_embeddings(question)

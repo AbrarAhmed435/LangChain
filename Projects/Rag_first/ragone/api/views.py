@@ -9,6 +9,7 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from rest_framework import generics
 from api.chroma import vector_store
 from langchain_openai import ChatOpenAI
+from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_community.document_loaders import YoutubeLoader
 from langchain_community.document_loaders.youtube import TranscriptFormat
 from dotenv import load_dotenv
@@ -18,7 +19,20 @@ from api.serializers import *
 
 load_dotenv()
 
-model=ChatOpenAI(model='gpt-4o-mini')
+# model=ChatOpenAI(model='gpt-4o-mini')
+
+from langchain_huggingface import ChatHuggingFace , HuggingFaceEndpoint
+llm=HuggingFaceEndpoint(
+    # repo_id="HuggingFaceH4/zephyr-7b-beta",
+    # repo_id="mistralai/Mistral-7B-Instruct-v0.2",
+    # repo_id="HuggingFaceH4/zephyr-7b-gemma-v0.1",
+    repo_id="openai/gpt-oss-20b",
+    # repo_id="openai/gpt-oss-120b",
+    # repo_id="Qwen/Qwen3-4B-Instruct-2507",
+    task="text-generation"
+)
+model=ChatHuggingFace(llm=llm)
+# model =ChatGoogleGenerativeAI(model='gemini-2.5-flash')
 
 
 

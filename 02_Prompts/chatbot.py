@@ -21,7 +21,7 @@ while True:
     if user_input=='exit()':
         break
     result=model.invoke(f"This is previous chat history {chat_history}---new question={user_input}")
-    print(result)
+    # print(result)
     print(f"AI: {result.content}")
     his="user:"+user_input+". Chatbot:"+str(result.content)[:200]
     chat_history+=[his]
