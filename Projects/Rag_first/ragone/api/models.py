@@ -10,6 +10,14 @@ class CustomUser(AbstractUser):
         return self.username
     
 class Document(models.Model):
+
+    PROCESSING_STATUS=[
+        ("pending","Pending"),
+        ("processing","Processing"),
+        ("failed","Failed")
+    ]
+    
+
     id=models.UUIDField(primary_key=True,default=uuid.uuid4,editable=False)
 
     user=models.ForeignKey(
@@ -21,6 +29,17 @@ class Document(models.Model):
     file = models.FileField(upload_to="pdfs/",null=True,blank=True) 
     summary=models.TextField(blank=True,null=True)
     created_at=models.DateTimeField(auto_now_add=True)
+
+    processing_status=models.CharField(
+        max_length=20,
+        choices=PROCESSING_STATUS,
+        default="pending"
+    )
+
+    error_message=models.TextField(
+        blank=True,
+        null=True
+    )
 
     def __str__(self):
         return f"{self.name} ({self.user})"

@@ -16,7 +16,8 @@ urlpatterns=[
     path('document/delete/<uuid:pk>/',DestroyDocumentView.as_view(),name="nothing"),
     path('upload/youtube/url/',YoutubeUploadView.as_view(),name="youtube_url"),
     path('delete/youtube/url/<uuid:pk>/',YoutubeDelete.as_view(),name="Delete_Youtube_Video"),
-    path('summarize/<uuid:pk>/',GenerateSummary.as_view(),name="Sumarize")
+    path('summarize/<uuid:pk>/',GenerateSummary.as_view(),name="Sumarize"),
+    path("document/<uuid:document_id>/status/",DocumentStatusView.as_view())
 ]
 
 if settings.DEBUG:

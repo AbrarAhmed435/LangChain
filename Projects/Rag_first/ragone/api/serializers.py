@@ -27,13 +27,14 @@ class RegisterSerializer(serializers.ModelSerializer):
             password=validated_data['password']
         )
         return user
+    #DRF calls create() automatically when you call .save() on the serializer
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model=CustomUser
         fields=['id','email']
     
-    #DRF calls create() automatically when you call .save() on the serializer
+    
     
 class LoginSerializer(serializers.Serializer):
     email=serializers.EmailField()
@@ -52,9 +53,11 @@ class LoginSerializer(serializers.Serializer):
     
 
 class DocumentUploadSerializer(serializers.ModelSerializer):
+
+
     class Meta:
         model=Document
-        fields=["id","name","file"]
+        fields=["id","name","file","processing_status","error_message"]
         read_only_fields=["id"]
         # write_only_fields=["file"]
         extra_kwargs={

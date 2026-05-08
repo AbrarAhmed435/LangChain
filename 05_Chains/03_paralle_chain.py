@@ -15,12 +15,13 @@ model2=ChatGoogleGenerativeAI(model='gemini-2.5-flash')
 
 
 prompt1=PromptTemplate(
-    template="Generate short and simple notes from the following test \n {text}",
+    template="Generate short and simple notes from the following text \n {text}",
     input_variables=['text']
 )
 
 prompt2=PromptTemplate(
-    template="Generate 5 short question answers from the following text \n {text}"
+    template="Generate 5 short question answers from the following text \n {text}",
+    input_variables=['text']
 )
 
 

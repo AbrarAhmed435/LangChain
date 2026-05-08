@@ -17,7 +17,17 @@
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   color: #e5e7eb;
 }
+.status.completed {
+  color: lightgreen;
+}
 
+.status.processing {
+  color: orange;
+}
+
+.status.failed {
+  color: red;
+}
 /* Card */
 .dashboard-card {
   background: #020617;

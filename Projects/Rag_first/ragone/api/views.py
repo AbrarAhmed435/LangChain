@@ -17,6 +17,9 @@ from urllib.parse import urlparse, parse_qs
 from django.shortcuts import get_object_or_404
 from api.serializers import *
 
+import threading
+from .services.pdf_processor import process_pdf
+
 load_dotenv()
 
 # model=ChatOpenAI(model='gpt-4o-mini')
@@ -75,47 +78,37 @@ View can use validated_data['user'], etc.
 
 
 class DocumentUploadView(APIView):
+
     permission_classes=[permissions.IsAuthenticated]
 
+
+
     def post(self,request):
+
         serializer=DocumentUploadSerializer(
             data=request.data,
             context={"request":request}
         )
+
         serializer.is_valid(raise_exception=True)
+
         document=serializer.save()
 
-        loader=PyMuPDFLoader(document.file.path)
-        docs=loader.load()
-        # print(len(docs))
-
-        splitter=RecursiveCharacterTextSplitter(
-            chunk_size=300,
-            chunk_overlap=20,
-            separators=["\n\n", "\n", " ", ""]
+        thread=threading.Thread(
+            target=process_pdf,
+            args=(document.id,)
         )
 
-        chunks=splitter.split_documents(docs)
-        # print(len(chunks))
-        # print(chunks[-1].page_content)
-
-        for idx,chunk in enumerate(chunks):
-            chunk.metadata.update({
-                "user_id":request.user.id,
-                "document_id":str(document.id),
-                "chunk_index":idx,
-                "source":"pdf"
-            })
-
-        vector_store.add_documents(chunks)
-        info = vector_store.get()
-        print("Number of embeddings:", len(info["ids"]))
+        thread.start()
 
         return Response({
             "id":document.id,
             "name":document.name,
-            "message":"pdf uploaded successfully"
-        },status=status.HTTP_201_CREATED)
+            "status":document.processing_status,
+            "message":"PDF upload started"
+        },status=status.HTTP_202_ACCEPTED)
+
+
     
     def get(self, request):
         documents = Document.objects.filter(user=request.user) #queryset
@@ -124,6 +117,28 @@ class DocumentUploadView(APIView):
             "documents":serializer.data
         },status=status.HTTP_200_OK)
         # return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+
+
+class DocumentStatusView(APIView):
+    permission_classes=[permissions.IsAuthenticated]
+
+    def get(self,request,document_id):
+        document=Document.objects.get(
+            id=document_id,
+            user=request.user
+        )
+
+        return Response({
+            "id": document.id,
+            "name": document.name,
+            "status": document.processing_status,
+            "error": document.error_message
+        })
+
+        
+        
 
 
 
